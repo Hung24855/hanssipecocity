@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HANSSIP ECOCITY - Landing Page</title>
+  <style>
+    :root {
+      --green: #005c45;
+      --green2: #0b7662;
+      --dark: #05382f;
+      --gold: #f3c64c;
+      --cream: #f8f4df;
+      --light: #f4f8f3;
+      --text: #12392f;
+      --white: #fff;
+      --shadow: 0 24px 70px rgba(0, 60, 45, .16)
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.55;
+      overflow-x: hidden
+    }
+
+    img {
+      max-width: 100%;
+      display: block
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto
+    }
+
+    .section {
+      padding: 92px 0;
+      position: relative;
+      overflow: hidden
+    }
+
+    .eyebrow {
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold);
+      font-size: 22px
+    }
+
+    .title {
+      font-size: clamp(32px, 5vw, 58px);
+      font-weight: 900;
+      line-height: 1.05;
+      color: var(--green);
+      margin: 10px 0 22px
+    }
+
+    .lead {
+      font-size: 18px;
+      max-width: 850px
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: none;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--dark);
+      padding: 14px 24px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .16);
+      transition: .35s
+    }
+
+    .btn:hover {
+      transform: translateY(-4px)
+    }
+
+    .btn.green {
+      background: var(--green);
+      color: #fff
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(52px);
+      transition: 1s cubic-bezier(.2, .8, .2, 1)
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: none
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, .86);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .05)
+    }
+
+    .navin {
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 950;
+      color: var(--green);
+      letter-spacing: .4px
+    }
+
+    .brand img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 8px
+    }
+
+    .links {
+      display: flex;
+      gap: 24px;
+      font-weight: 800;
+      font-size: 14px
+    }
+
+    .links a {
+      position: relative
+    }
+
+    .links a:after {
+      content: "";
+      position: absolute;
+      height: 3px;
+      background: var(--gold);
+      left: 0;
+      right: 100%;
+      bottom: -8px;
+      transition: .3s
+    }
+
+    .links a:hover:after {
+      right: 0
+    }
+
+    .menu {
+      display: none
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding-top: 74px;
+      position: relative;
+      display: grid;
+      align-items: center;
+      color: #fff;
+      background: #03382c;
+      overflow: hidden
+    }
+
+    .slides {
+      position: absolute;
+      inset: 0
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.08);
+      transition: 1.4s;
+      filter: brightness(0.65) contrast(1.05) saturate(1.1)
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: scale(1)
+    }
+
+    .hero:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0, 36, 27, 0.75), rgba(0, 48, 36, 0.5), rgba(0, 0, 0, 0.35));
+      z-index: 1
+    }
+
+    .shine {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 22%;
+      left: -30%;
+      background: linear-gradient(110deg, transparent, rgba(255, 255, 255, .38), transparent);
+      z-index: 2;
+      animation: shine 4.8s infinite
+    }
+
+    @keyframes shine {
+      0% {
+        left: -35%
+      }
+
+      55%,
+      100% {
+        left: 115%
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      padding: 90px 0;
+      max-width: 900px;
+      transform: translate(-82px, 88px)
+    }
+
+    .hero-text-bg {
+      display: inline-block;
+      padding: 22px 30px;
+      border-radius: 28px;
+      background: linear-gradient(90deg, rgba(0, 83, 62, .68), rgba(0, 83, 62, .36), rgba(0, 83, 62, .02));
+      backdrop-filter: blur(4px);
+      box-shadow: 0 18px 48px rgba(0, 45, 35, .24);
+      max-width: 790px
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 6.2vw, 78px);
+      line-height: 1;
+      color: var(--gold);
+      font-weight: 950;
+      text-shadow: 0 8px 24px rgba(0, 0, 0, .55), 0 0 2px rgba(0, 0, 0, .8);
+      animation: fadeUp 1s both;
+      white-space: nowrap;
+      letter-spacing: -2px
+    }
+
+    .hero p {
+      font-size: 19px;
+      max-width: 700px;
+      margin: 18px 0;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, .55);
+      animation: fadeUp 1s .15s both
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeUp 1s .3s both
+    }
+
+    .arrow {
+      position: absolute;
+      z-index: 4;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(243, 198, 76, .85);
+      font-size: 28px;
+      color: var(--green);
+      cursor: pointer
+    }
+
+    .prev {
+      left: 22px
+    }
+
+    .next {
+      right: 22px
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(35px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .stats-strip {
+      position: relative;
+      z-index: 5;
+      margin-top: -74px
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow)
+    }
+
+    .stat {
+      background: var(--green);
+      color: #fff;
+      padding: 22px;
+      text-align: center;
+      border-right: 1px solid rgba(255, 255, 255, .2)
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--gold);
+      font-size: 34px;
+      line-height: 1
+    }
+
+    .overview {
+      background: linear-gradient(180deg, #fff, var(--cream))
+    }
+
+    .table-card {
+      background: #096653;
+      color: #fff;
+      border-radius: 4px;
+      padding: 28px;
+      box-shadow: var(--shadow)
+    }
+
+    .project-table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    .project-table th,
+    .project-table td {
+      border: 1px solid rgba(255, 255, 255, .7);
+      padding: 13px 16px;
+      text-align: left
+    }
+
+    .project-table th {
+      width: 30%;
+      color: #fff;
+      font-weight: 900
+    }
+
+    .project-table caption {
+      font-size: 42px;
+      font-family: Georgia, serif;
+      color: var(--gold);
+      font-weight: 800;
+      margin-bottom: 15px
+    }
+
+    .location {
+      background: linear-gradient(rgba(248, 251, 245, .90), rgba(248, 251, 245, .93)), url('assets/images/3nenmo1.jpg') center/cover fixed
+    }
+
+    .loc-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.25fr;
+      gap: 34px;
+      align-items: center
+    }
+
+    .map-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 36px
+    }
+
+    .map-preview {
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      position: relative;
+      border: 1px solid rgba(0, 92, 69, 0.12);
+      transition: transform .35s, box-shadow .35s
+    }
+
+    .map-preview:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(0, 60, 45, 0.18)
+    }
+
+    .map-preview:after {
+      content: "🔍 Nhấp đúp để xem toàn màn hình";
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      background: rgba(0, 92, 69, 0.9);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 13px;
+      backdrop-filter: blur(4px)
+    }
+
+    /* ===== RIGHT SIDE PHOTO OVERLAP ===== */
+    .loc-right {
+      position: relative;
+      /* Container dùng để chứa 2 ảnh đè nhau */
+    }
+
+    .loc-photo-big {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 60, 45, .18);
+      cursor: pointer;
+    }
+
+    .loc-photo-big img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform .5s;
+    }
+
+    .loc-photo-big:hover img {
+      transform: scale(1.04);
+    }
+
+    .loc-photo-small {
+      position: absolute;
+      bottom: -28px;
+      right: -18px;
+      width: 55%;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(0,0,0,.28);
+      border: 4px solid #fff;
+      cursor: pointer;
+      z-index: 10;
+      transition: transform .35s;
+    }
+
+    .loc-photo-small:hover {
+      transform: scale(1.04) translateY(-4px);
+    }
+
+    .loc-photo-small img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .loc-photo-tall {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 60, 45, .14);
+      cursor: pointer;
+    }
+
+    .loc-photo-tall img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform .5s;
+    }
+
+    .loc-photo-tall:hover img {
+      transform: scale(1.04);
+    }
+
+    .loc-photo-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 18px 16px;
+      background: linear-gradient(to top, rgba(0,35,25,.82) 0%, transparent 100%);
+      color: #fff;
+    }
+
+    .loc-photo-caption .caption-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: var(--gold);
+      color: var(--dark);
+      padding: 3px 10px;
+      border-radius: 99px;
+      margin-bottom: 6px;
+    }
+
+    .loc-photo-caption .caption-title {
+      font-size: 16px;
+      font-weight: 800;
+      text-shadow: 0 2px 8px rgba(0,0,0,.5);
+    }
+
+    .loc-photo-caption .caption-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,.78);
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+
+    .map-preview img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block
+    }
+
+    .loc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: start
+    }
+
+    /* ===== PHOTO GALLERY HƯỚNG ===== */
+    .loc-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 22px;
+      padding-top: 30px;
+      overflow: visible;
+    }
+
+    .loc-tile {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 14px;
+      aspect-ratio: 4/3;
+    }
+
+    /* Cột phải (T, B) dịch lên cao hơn */
+    .loc-tile:nth-child(2),
+    .loc-tile:nth-child(4) {
+      transform: translateY(-30px);
+    }
+
+    .loc-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .55s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .loc-tile:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Subtle dark gradient at bottom only for text legibility */
+    .loc-tile-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0) 45%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 14px 14px 12px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Direction badge */
+    .loc-tile-dir {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 950;
+      color: var(--dark);
+      box-shadow: 0 4px 14px rgba(0,0,0,.35);
+      transition: transform .35s;
+      z-index: 3;
+    }
+
+    .loc-tile:hover .loc-tile-dir {
+      transform: scale(1.12);
+    }
+
+    .loc-tile-name {
+      font-size: 16px;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+      margin-bottom: 3px;
+      letter-spacing: .3px;
+    }
+
+    .loc-tile-desc {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.92);
+      line-height: 1.4;
+      margin: 0;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
+    }
+
+    .advantages {
+      background: linear-gradient(rgba(3, 56, 47, .86), rgba(3, 56, 47, .9)), url('assets/images/4nenmo.jpg') center/cover fixed;
+      color: #fff
+    }
+
+    .advantages .title {
+      color: #fff
+    }
+
+    .adv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px
+    }
+
+    .adv {
+      background: rgba(255, 255, 255, .10);
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 24px;
+      padding: 28px;
+      transition: .35s
+    }
+
+    .adv:hover {
+      transform: translateY(-12px);
+      background: rgba(255, 255, 255, .16)
+    }
+
+    .adv b {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--green);
+      font-size: 24px;
+      margin-bottom: 14px
+    }
+
+    .plan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px
+    }
+
+    .image-card {
+      border-radius: 24px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 16px 45px rgba(0, 60, 45, 0.16);
+      cursor: pointer;
+      border: 4px solid #ffffff;
+      transition: transform .35s, box-shadow .35s;
+    }
+
+    .image-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0, 60, 45, 0.22);
+    }
+
+    .image-card img {
+      height: 420px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+      transition: transform .55s;
+    }
+
+    .image-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .products {
+      background: #fff;
+    }
+
+    .prod-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 30px;
+    }
+    @media (max-width: 768px) {
+      .prod-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .prod {
+      background: #fff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 14px 40px rgba(0, 60, 45, 0.12);
+      border: 1px solid rgba(0, 92, 69, 0.10);
+      transition: all .35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .prod:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 22px 55px rgba(0, 60, 45, 0.18);
+      border-color: var(--gold);
+    }
+
+    .prod img {
+      height: 340px;
+      width: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .prod-body {
+      padding: 24px 28px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ownership {
+      background: linear-gradient(135deg, var(--dark), var(--green));
+      color: #fff;
+      text-align: center
+    }
+
+    .own-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 32px;
+    }
+    @media (max-width: 900px) {
+      .own-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 500px) {
+      .own-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .own {
+      background: rgba(255, 255, 255, .12);
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 20px;
+      padding: 26px 20px;
+      backdrop-filter: blur(8px);
+      transition: transform .35s, background .35s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .own:hover {
+      transform: translateY(-6px);
+      background: rgba(255, 255, 255, .18);
+    }
+
+    .own span.own-label {
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 1.2px;
+      color: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .own-num {
+      font-size: 40px;
+      font-weight: 950;
+      color: var(--gold);
+      line-height: 1.1;
+      margin: 6px 0;
+      text-shadow: 0 4px 16px rgba(243, 198, 76, 0.35);
+      letter-spacing: -0.5px;
+    }
+
+    .own-sub {
+      color: #ffffff;
+      font-size: 14.5px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .utilities {
+      background: var(--cream)
+    }
+
+    .util-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px
+    }
+
+    .util {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 13px 35px rgba(0, 0, 0, .08);
+      transition: .35s;
+      cursor: pointer;
+    }
+
+    .util:hover {
+      transform: translateY(-9px)
+    }
+
+    .util img {
+      height: 210px;
+      width: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform .4s ease;
+    }
+
+    .util p {
+      padding: 14px;
+      font-weight: 800;
+      color: var(--green)
+    }
+
+    .legal {
+      background: #fff8e8
+    }
+
+    .legal-box {
+      background: #fff;
+      max-width: 900px;
+      margin: auto;
+      border-radius: 28px;
+      padding: 35px;
+      box-shadow: var(--shadow)
+    }
+
+    .legal li {
+      margin: 12px 0
+    }
+
+    .footer-cta {
+      background: linear-gradient(rgba(0, 80, 60, .82), rgba(0, 60, 45, .85)), url('assets/images/footer-bg.jpg') center/cover fixed;
+      color: #fff;
+      text-align: center
+    }
+
+    .contact {
+      background: #f8f8ee
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px
+    }
+
+    .form,
+    .contact-info {
+      background: #fff;
+      border-radius: 26px;
+      padding: 30px;
+      box-shadow: var(--shadow)
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 14px 15px;
+      border: 1px solid #d4e2dc;
+      border-radius: 13px;
+      margin: 8px 0 15px;
+      font-family: inherit;
+      font-size: 15px
+    }
+
+    textarea {
+      min-height: 110px
+    }
+
+    .map {
+      height: 280px;
+      border-radius: 20px;
+      overflow: hidden
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0
+    }
+
+    .minigame {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 999999
+    }
+
+    .game-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #efffe8, #fff7c4);
+      box-shadow: var(--shadow);
+      font-weight: 950;
+      color: var(--green);
+      padding: 12px 18px 12px 12px;
+      animation: pulse 1.7s infinite;
+      cursor: pointer;
+      min-width: 215px
+    }
+
+    .leaf-icon {
+      width: 54px;
+      height: 54px;
+      background: linear-gradient(135deg, #65c54a, #007c47);
+      border-radius: 0 70% 45% 70%;
+      transform: rotate(-45deg);
+      position: relative;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 24px rgba(0, 92, 69, .26)
+    }
+
+    .leaf-icon:before {
+      content: "";
+      position: absolute;
+      width: 3px;
+      height: 38px;
+      background: rgba(255, 255, 255, .72);
+      border-radius: 9px;
+      transform: rotate(45deg)
+    }
+
+    .leaf-icon span {
+      transform: rotate(45deg);
+      color: #fff;
+      font-size: 22px;
+      position: relative;
+      z-index: 2
+    }
+
+    .game-btn-text {
+      font-size: 14px;
+      line-height: 1.25;
+      text-align: left
+    }
+
+    .game-btn-text b {
+      display: block;
+      font-size: 16px;
+      color: #006143
+    }
+
+    @keyframes pulse {
+      50% {
+        transform: scale(1.04)
+      }
+    }
+
+    .game-panel {
+      display: none;
+      position: absolute;
+      right: 0;
+      bottom: 92px;
+      width: 760px;
+      max-width: calc(100vw - 34px);
+      background: rgba(255, 255, 255, .96);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      border: 1px solid rgba(0, 92, 69, .14);
+      backdrop-filter: blur(14px)
+    }
+
+    .game-panel.open {
+      display: block
+    }
+
+    .game-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: start
+    }
+
+    .gift-preview {
+      background: linear-gradient(135deg, #f7fff3, #fff8d7);
+      border: 1px solid #d8eadf;
+      border-radius: 22px;
+      padding: 18px
+    }
+
+    .gift-preview h4 {
+      font-size: 20px;
+      color: var(--green);
+      margin-bottom: 10px
+    }
+
+    .gift-preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px
+    }
+
+    .gift-item {
+      background: #fff;
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 10px 24px rgba(0, 92, 69, .08);
+      font-size: 13px;
+      font-weight: 850;
+      color: var(--green);
+      min-height: 62px
+    }
+
+    .gift-item span {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 3px
+    }
+
+    .game-input-group {
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .game-input-group label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 3px;
+    }
+
+    .game-input-group input,
+    .game-input-group select {
+      margin: 0;
+      padding: 9px 12px;
+      font-size: 13.5px;
+      border-radius: 10px;
+    }
+
+    .wheel-wrapper {
+      position: relative;
+      width: 270px;
+      height: 270px;
+      margin: 18px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wheel-pointer {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 28px solid #e74c3c;
+      z-index: 10;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35));
+    }
+
+    .wheel {
+      width: 270px;
+      height: 270px;
+      min-width: 270px;
+      min-height: 270px;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      border: 8px solid #ffffff;
+      box-shadow: 0 12px 35px rgba(0, 92, 69, .25);
+      position: relative;
+      transition: transform 4.5s cubic-bezier(0.12, 0.8, 0.15, 1);
+      box-sizing: border-box;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .wheel svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .wheel-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 4px solid var(--gold);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 950;
+      font-size: 15px;
+      color: var(--green);
+      z-index: 5;
+      text-transform: uppercase;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .84);
+      z-index: 2000;
+      display: none;
+      place-items: center;
+      padding: 30px
+    }
+
+    .lightbox.open {
+      display: grid
+    }
+
+    .lightbox img {
+      max-height: 88vh;
+      max-width: 94vw;
+      border-radius: 16px
+    }
+
+    .close {
+      position: absolute;
+      right: 25px;
+      top: 20px;
+      color: #fff;
+      font-size: 42px;
+      cursor: pointer
+    }
+
+    .progress {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 4px;
+      background: var(--gold);
+      z-index: 2002;
+      width: 0
+    }
+
+    .toTop {
+      position: fixed;
+      left: 22px;
+      bottom: 22px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: var(--green);
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      z-index: 998;
+      box-shadow: var(--shadow)
+    }
+
+    .game-check {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green);
+      margin: 2px 0 14px
+    }
+
+    .game-check input {
+      width: auto;
+      margin-top: 3px
+    }
+
+    .gift-list {
+      background: #f8fff9;
+      border: 1px solid #d8eadf;
+      border-radius: 16px;
+      padding: 14px;
+      margin: 12px 0;
+      text-align: left
+    }
+
+    .gift-list p {
+      margin: 6px 0;
+      font-weight: 800;
+      color: var(--green)
+    }
+
+    .game-result-title {
+      font-size: 22px;
+      color: var(--green);
+      font-weight: 950;
+      margin-bottom: 8px
+    }
+
+    .thank-box {
+      background: #f8fff9;
+      border-left: 5px solid var(--gold);
+      border-radius: 16px;
+      padding: 14px;
+      text-align: left;
+      color: var(--green);
+      font-weight: 700;
+      line-height: 1.55
+    }
+
+    .game-panel h3 {
+      color: var(--green);
+      font-size: 22px;
+      margin-bottom: 6px
+    }
+
+    .game-panel p {
+      font-size: 14px
+    }
+
+    .game-panel select {
+      background: #fff
+    }
+
+    .game-panel .btn {
+      justify-content: center;
+      width: 100%;
+      margin-top: 4px
+    }
+
+    .game-sub {
+      color: #42695d;
+      margin-bottom: 12px
+    }
+
+    .game-form-title {
+      font-size: 18px;
+      color: var(--green);
+      font-weight: 950;
+      margin: 3px 0 10px
+    }
+
+    @media(max-width:900px) {
+      .game-panel {
+        width: calc(100vw - 24px);
+        right: -10px;
+        bottom: 96px;
+        max-height: 78vh;
+        overflow: auto
+      }
+
+      .game-layout {
+        grid-template-columns: 1fr
+      }
+
+      .gift-preview-grid {
+        grid-template-columns: 1fr
+      }
+
+      .game-btn {
+        min-width: 190px;
+        padding-right: 14px
+      }
+
+      .game-btn-text {
+        font-size: 13px
+      }
+
+      .game-btn-text b {
+        font-size: 14px
+      }
+
+      .hero-content {
+        transform: none
+      }
+
+      .hero-text-bg {
+        padding: 22px 18px;
+        max-width: 100%
+      }
+
+      .hero h1 {
+        white-space: normal;
+        font-size: clamp(40px, 13vw, 64px)
+      }
+
+      /* MOBILE SIDEBAR MENU */
+      .nav {
+        z-index: 10005 !important;
+      }
+
+      .menu {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        background: var(--gold);
+        color: var(--dark);
+        border: none;
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        cursor: pointer;
+        z-index: 10010 !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+
+      .links {
+        display: flex !important;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: -320px;
+        width: 290px;
+        height: 100vh;
+        background: #042e27 !important;
+        padding: 85px 26px 40px;
+        gap: 16px;
+        box-shadow: -10px 0 35px rgba(0, 0, 0, 0.6);
+        z-index: 10008 !important;
+        transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: auto !important;
+      }
+
+      .links.open {
+        right: 0 !important;
+      }
+
+      .links a {
+        color: #ffffff !important;
+        font-size: 16px;
+        font-weight: 800;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: background 0.2s;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        cursor: pointer !important;
+        pointer-events: auto !important;
+      }
+
+      .links a:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: var(--gold) !important;
+      }
+
+      .nav-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9998 !important;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .nav-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* RESPONSIVE VỊ TRÍ CHIẾN LƯỢC ON MOBILE */
+      .loc-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .loc-gallery {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 15px;
+        padding-top: 0;
+      }
+
+      .loc-tile:nth-child(2),
+      .loc-tile:nth-child(4) {
+        transform: none !important;
+      }
+
+      .loc-tile {
+        aspect-ratio: 4 / 3.2;
+        border-radius: 12px;
+      }
+
+      .loc-tile-dir {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+        top: 8px;
+        left: 8px;
+      }
+
+      .loc-tile-overlay {
+        padding: 10px 10px 8px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.55) 70%, transparent 100%);
+      }
+
+      .loc-tile-name {
+        font-size: 13.5px;
+        font-weight: 900;
+        margin-bottom: 2px;
+      }
+
+      .loc-tile-desc {
+        font-size: 11px;
+        line-height: 1.35;
+        font-weight: 500;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .loc-right {
+        margin-top: 10px;
+      }
+
+      .loc-photo-small {
+        position: relative;
+        width: 100%;
+        right: 0;
+        bottom: 0;
+        margin-top: 14px;
+        border-radius: 16px;
+        border: 3px solid #fff;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+      }
+
+      .stats,
+      .plan-grid,
+      .prod-grid,
+      .own-grid,
+      .util-grid,
+      .contact-grid,
+      .adv-grid {
+        grid-template-columns: 1fr
+      }
+
+      .loc-cards,
+      .map-duo {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .stats-strip {
+        margin-top: 20px
+      }
+
+      .section {
+        padding: 68px 0
+      }
+
+      .hero {
+        min-height: 86vh
+      }
+
+      .project-table th,
+      .project-table td {
+        display: block;
+        width: 100%
+      }
+
+      .image-card img {
+        height: 300px
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress" id="progress"></div>
+  <nav class="nav">
+    <div class="container navin"><a class="brand" href="#top"><img src="assets/images/001.png" alt="Logo"><span>HANSSIP ECOCITY</span></a>
+      <div class="links"><a href="#overview">Tổng quan</a><a href="#location">Vị trí</a><a href="#products">Sản
+          phẩm</a><a href="#utilities">Tiện ích</a><a href="#legal">Pháp lý</a><a href="#contact">Liên hệ</a></div>
+      <button class="menu">☰</button>
+    </div>
+  </nav>
+  <header class="hero" id="top">
+    <div class="slides">
+      <div class="slide active" style="background-image:url('assets/images/cover1.jpg')"></div>
+      <div class="slide" style="background-image:url('assets/images/cover2.jpg')"></div>
+      <div class="slide" style="background-image:url('assets/images/cover3.jpg')"></div>
+    </div>
+    <div class="shine"></div><button class="arrow prev" id="prev">‹</button><button class="arrow next"
+      id="next">›</button>
+    <div class="container hero-content">
+      <div class="hero-text-bg">
+        <div class="eyebrow">Khu đô thị dịch vụ thương mại liền kề KCN HANSSIP</div>
+        <h1>HANSSIP ECOCITY</h1>
+        <p>Sống xanh - làm việc thuận tiện - kinh doanh thịnh vượng trong hệ sinh thái công nghiệp, đô thị và dịch vụ
+          đồng bộ phía Nam Hà Nội.</p>
+        <div class="hero-actions"><a class="btn" href="#contact">Liên hệ tư vấn</a><a class="btn green"
+            href="#overview">Khám phá dự án</a></div>
+      </div>
+    </div>
+  </header>
+  <div class="stats-strip">
+    <div class="container stats">
+      <div class="stat"><strong><span data-count="100">0</span> ha</strong>Tổng diện tích</div>
+      <div class="stat"><strong>+<span data-count="40">0</span></strong>Tiện ích đồng bộ</div>
+      <div class="stat"><strong><span data-count="3.7">0</span> ha</strong>Trung tâm xanh</div>
+      <div class="stat">Chuẩn sống<strong>ESG++</strong></div>
+      <div class="stat"><strong>+<span data-count="22000">0</span></strong>Cư dân</div>
+    </div>
+  </div>
+  <section class="section overview" id="overview">
+    <div class="container">
+      <div class="eyebrow reveal">Tổng quan dự án</div>
+      <h2 class="title reveal">HANSSIP ECOCITY</h2>
+      <div class="table-card reveal">
+        <table class="project-table">
+          <caption>HANSSIP ECOCITY</caption>
+          <tr>
+            <th>Tên dự án</th>
+            <td>HANSSIP ECOCITY</td>
+          </tr>
+          <tr>
+            <th>Vị trí</th>
+            <td>Khu công nghiệp hỗ trợ Nam Hà Nội, xã Đại Xuyên, TP. Hà Nội</td>
+          </tr>
+          <tr>
+            <th>Chủ đầu tư</th>
+            <td>Công ty CP Đầu tư - Phát triển N&G</td>
+          </tr>
+          <tr>
+            <th>Tổng diện tích quy hoạch</th>
+            <td>Giai đoạn 1: 100ha</td>
+          </tr>
+          <tr>
+            <th>Tổng mức đầu tư</th>
+            <td>~ 1 tỷ USD</td>
+          </tr>
+          <tr>
+            <th>Quy mô dân số</th>
+            <td>~ 22.000 người</td>
+          </tr>
+          <tr>
+            <th>Loại hình phát triển</th>
+            <td>Khu phức hợp đa năng: Đô thị thương mại - Dịch vụ</td>
+          </tr>
+          <tr>
+            <th>Sản phẩm</th>
+            <td>Nhà phố liền kề, nhà phố thương mại shophouse, nhà chuyên gia, nhà công nhân</td>
+          </tr>
+          <tr>
+            <th>Pháp lý</th>
+            <td>Sở hữu lâu dài</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="section location" id="location">
+    <div class="container">
+      <div class="eyebrow reveal">Vị trí chiến lược</div>
+      <div class="loc-grid">
+        <div>
+          <p class="lead reveal">Nằm trong tọa độ vàng của cực phát triển phía Nam Thủ đô, <strong style="color: var(--green); font-weight: 850;">HANSSIP ECOCITY</strong> kết nối trực tiếp với hành lang siêu hạ tầng tương lai bao gồm Khu đô thị thể thao Quốc tế Hà Nội và đô thị công nghệ 6000ha, đồng thời đón đầu tiềm năng giao thương khổng lồ từ Sân bay thứ 2 dự kiến của Vùng Thủ đô, tuyến QL1A mở rộng 90m và đường gom cao tốc Pháp Vân - Cầu Giẽ.</p>
+          <div class="loc-gallery reveal">
+
+            <div class="loc-tile" data-img="assets/images/002.webp">
+              <img src="assets/images/002.webp" alt="Phía Đông">
+              <div class="loc-tile-overlay">
+                <span class="loc-tile-name">→ Phía Đông</span>
+                <p class="loc-tile-desc">Tiếp giáp cao tốc Pháp Vân – Cầu Giẽ, thuận lợi kết nối vào trung tâm Hà Nội và các tỉnh phía Nam.</p>
+              </div>
+              <div class="loc-tile-dir">Đ</div>
+            </div>
+
+            <div class="loc-tile" data-img="assets/images/003.webp">
+              <img src="assets/images/003.webp" alt="Phía Tây">
+              <div class="loc-tile-overlay">
+                <span class="loc-tile-name">← Phía Tây</span>
+                <p class="loc-tile-desc">Tiếp giáp Quốc lộ 1A (đường 90m), trục giao thông huyết mạch kết nối liên vùng.</p>
+              </div>
+              <div class="loc-tile-dir">T</div>
+            </div>
+
+            <div class="loc-tile" data-img="assets/images/004.jfif">
+              <img src="assets/images/004.jfif" alt="Phía Nam">
+              <div class="loc-tile-overlay">
+                <span class="loc-tile-name">↓ Phía Nam</span>
+                <p class="loc-tile-desc">Nút giao giữa QL1A và cao tốc Pháp Vân – Cầu Giẽ, điểm giao thương chiến lược.</p>
+              </div>
+              <div class="loc-tile-dir">N</div>
+            </div>
+
+            <div class="loc-tile" data-img="assets/images/005.jpg">
+              <img src="assets/images/005.jpg" alt="Phía Bắc">
+              <div class="loc-tile-overlay">
+                <span class="loc-tile-name">↑ Phía Bắc</span>
+                <p class="loc-tile-desc">Liền kề khu dân cư Kiều Đoài và làng nghề truyền thống phía Nam Hà Nội.</p>
+              </div>
+              <div class="loc-tile-dir">B</div>
+            </div>
+
+          </div>
+        </div>
+        <div class="loc-right reveal">
+
+          <!-- Ảnh to -->
+          <div class="loc-photo-big" data-img="assets/images/31vitri.jpg">
+            <img src="assets/images/31vitri.jpg" alt="Sơ đồ vị trí 1">
+            <div class="loc-photo-caption">
+              <span class="caption-tag">Vị trí đắc địa</span>
+              <div class="caption-title">Tâm điểm kết nối</div>
+              <div class="caption-sub">Quy hoạch tổng thể hạ tầng giao thông</div>
+            </div>
+          </div>
+
+          <!-- Ảnh nhỏ đè góc dưới phải -->
+          <div class="loc-photo-small" data-img="assets/images/32vitri.jpg">
+            <img src="assets/images/32vitri.jpg" alt="Sơ đồ vị trí 2">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section advantages">
+    <div class="container">
+      <div class="eyebrow reveal">6 giá trị tạo nên sức hút</div>
+      <h2 class="title reveal">Của HANSSIP ECOCITY</h2>
+      <div class="adv-grid">
+        <div class="adv reveal"><b>01</b>
+          <h3>Tâm điểm kết nối</h3>
+          <p>Đón nhịp quy hoạch Thủ đô <br>Tọa lạc tại cửa ngõ phía Nam Hà Nội, đô thị hưởng lợi từ định hướng Quy hoạch Thủ đô tầm nhìn 100 năm, hệ thống giao thông chiến lược và sự phát triển của KCN hỗ trợ Nam Hà Nội, kiến tạo dư địa tăng trưởng dài hạn.</p>
+        </div>
+        <div class="adv reveal"><b>02</b>
+          <h3>Tiện ích all-in-one</h3>
+          <p>Tích hợp đầy đủ không gian sống – làm việc – mua sắm – giáo dục – giải trí trong một hệ sinh thái tiện ích đồng bộ, đáp ứng trọn vẹn mọi nhu cầu của cư dân hiện đại.</p>
+        </div>
+        <div class="adv reveal"><b>03</b>
+          <h3>Pháp lý minh bạch</h3>
+          <p>Minh bạch trong pháp lý, rõ ràng trong quyền sở hữu, giúp khách hàng an tâm an cư và đầu tư bền vững.</p>
+        </div>
+        <div class="adv reveal"><b>04</b>
+          <h3>Cộng đồng tri thức</h3>
+          <p>Nơi hội tụ các chuyên gia, kỹ sư, doanh nhân và lực lượng lao động chất lượng cao, kiến tạo cộng đồng văn minh, năng động và giàu tiềm năng phát triển</p>
+        </div>
+        <div class="adv reveal"><b>05</b>
+          <h3>Tiềm năng gia tăng giá trị</h3>
+          <p>Hưởng lợi từ hạ tầng giao thông ngày càng hoàn thiện, sự phát triển của KCN hỗ trợ Nam Hà Nội và nhu cầu an cư – thương mại gia tăng, mở ra tiềm năng tăng trưởng bền vững trong tương lai.</p>
+        </div>
+        <div class="adv reveal"><b>06</b>
+          <h3>Không gian sống xanh</h3>
+          <p>Được quy hoạch hài hòa giữa thiên nhiên và đô thị, mang đến môi trường sống xanh, tiện nghi và bền vững, nâng tầm chất lượng cuộc sống cho mọi thế hệ.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="eyebrow reveal">Mặt bằng tổng thể</div>
+      <h2 class="title reveal">Mặt bằng tổng thể khu đô thị HANSSIP ECOCITY</h2>
+      <div class="plan-grid">
+        <div class="image-card reveal" data-img="assets/images/006.jpg"><img src="assets/images/006.jpg">
+        </div>
+        <div class="image-card reveal" data-img="assets/images/007.png"><img src="assets/images/007.png"></div>
+      </div>
+    </div>
+  </section>
+  <section class="section products" id="products">
+    <div class="container">
+      <div class="eyebrow reveal">Sản phẩm</div>
+      <h2 class="title reveal">Dòng sản phẩm tại HANSSIP ECOCITY</h2>
+      <div class="prod-grid">
+        <div class="prod reveal" data-img="assets/images/product1.jpg"><img src="assets/images/product1.jpg" alt="HANSSIP Townhouse">
+          <div class="prod-body">
+            <h3>HANSSIP Townhouse</h3>
+            <p>Nhà phố thương mại, phù hợp an cư và khai thác kinh doanh.</p>
+          </div>
+        </div>
+        <div class="prod reveal" data-img="assets/images/008.jpg"><img src="assets/images/008.jpg" alt="HANSSIP Gateway">
+          <div class="prod-body">
+            <h3>HANSSIP Gateway</h3>
+            <p>Phố thương mại cổng KCN, đón dòng chuyên gia và người lao động.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section ownership">
+    <div class="container">
+      <div class="eyebrow reveal">Ưu đãi đặc biệt</div>
+      <h2 class="title reveal" style="color:#fff">Chính sách thanh toán linh hoạt</h2>
+      <div class="own-grid reveal">
+        <div class="own">
+          <span class="own-label">CHIẾT KHẤU</span>
+          <div class="own-num">9%</div>
+          <div class="own-sub">Chiết khấu lên đến</div>
+        </div>
+        <div class="own">
+          <span class="own-label">HỖ TRỢ TÀI CHÍNH</span>
+          <div class="own-num">70%</div>
+          <div class="own-sub">Hỗ trợ vay đến 70% giá trị</div>
+        </div>
+        <div class="own">
+          <span class="own-label">SỞ HỮU</span>
+          <div class="own-num" style="font-size: 26px; margin: 12px 0 10px;">LÂU DÀI</div>
+        </div>
+        <div class="own">
+          <span class="own-label">QUÀ TẶNG</span>
+          <div class="own-num" style="font-size: 32px;">300 Triệu</div>
+          <div class="own-sub">Voucher nội thất cao cấp</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section utilities" id="utilities">
+    <div class="container">
+      <div class="eyebrow reveal">40+ tiện ích đồng bộ</div>
+      <h2 class="title reveal">Tiện ích đồng bộ cho cuộc sống hiện đại</h2>
+      <p class="lead reveal" style="margin-bottom: 32px;">Hơn 40 tiện ích được đầu tư đồng bộ, kiến tạo chuẩn sống hiện đại, nơi mọi nhu cầu từ an cư, làm việc đến kinh doanh và giải trí đều được đáp ứng trong tầm tay.</p>
+      <div class="util-grid">
+        <div class="util reveal" data-img="assets/images/010.png"><img src="assets/images/010.png" alt="Trung tâm thương mại">
+          <p>Trung tâm thương mại</p>
+        </div>
+        <div class="util reveal" data-img="assets/images/011.jpg"><img src="assets/images/011.jpg" alt="Trường học">
+          <p>Trường học</p>
+        </div>
+        <div class="util reveal" data-img="assets/images/012.jpg"><img src="assets/images/012.jpg" alt="Công viên cây xanh">
+          <p>Công viên cây xanh</p>
+        </div>
+        <div class="util reveal" data-img="assets/images/013.jpg"><img src="assets/images/013.jpg" alt="Không gian thể thao">
+          <p>Không gian thể thao</p>
+        </div>
+        <div class="util reveal" data-img="assets/images/014.jpg"><img src="assets/images/014.jpg" alt="Trung tâm chăm sóc sức khỏe">
+          <p>Trung tâm chăm sóc sức khỏe</p>
+        </div>
+        <div class="util reveal" data-img="assets/images/015.png"><img src="assets/images/015.png" alt="Nhà ở chuyên gia">
+          <p>Phố ẩm thực</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section legal" id="legal">
+    <div class="container">
+      <div class="eyebrow reveal">Pháp lý minh bạch</div>
+      <h2 class="title reveal">An tâm đầu tư - Vững chắc sở hữu</h2>
+      <div class="legal-box reveal">
+        <p>HANSSIP ECOCITY được phát triển theo định hướng đô thị dịch vụ thương mại đồng bộ, minh bạch thông tin và
+          thuận tiện cho hoạt động đầu tư.</p>
+        <ul>
+          <li>Quỹ đất được quy hoạch rõ ràng.</li>
+          <li>Chủ đầu tư uy tín trong phát triển hạ tầng KCN.</li>
+          <li>Định hướng khai thác lâu dài cho nhu cầu thực.</li>
+          <li>Hệ thống tiện ích và hạ tầng đồng bộ.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="section footer-cta">
+    <div class="container">
+      <div class="eyebrow reveal">HANSSIP ECOCITY</div>
+      <h2 class="title reveal" style="color:#fff">Liên hệ ngay để nhận tư vấn chi tiết</h2>
+      <p class="lead reveal" style="margin:auto">Khám phá cơ hội an cư, kinh doanh và đầu tư tại khu đô thị dịch vụ
+        thương mại liền kề KCN HANSSIP.</p><br><a href="#contact" class="btn">Liên hệ tư vấn</a>
+    </div>
+  </section>
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="eyebrow reveal">Liên hệ tư vấn đầu tư</div>
+      <h2 class="title reveal">Gửi thông tin cho chúng tôi</h2>
+      <div class="contact-grid">
+        <form class="form reveal" id="contactForm" autocomplete="on">
+          <input id="cName" name="name" autocomplete="name" type="text" placeholder="Họ và tên *" required>
+          <input id="cPhone" name="phone" autocomplete="tel" type="tel" placeholder="Số điện thoại *" required>
+          <input id="cEmail" name="email" autocomplete="email" type="email" placeholder="Email">
+          <select id="cNeed" name="need">
+            <option value="">Nhu cầu quan tâm</option>
+            <option>Nhà phố liền kề</option>
+            <option>Shophouse</option>
+            <option>Hợp tác kinh doanh tiện ích</option>
+          </select>
+          <textarea id="cNote" name="note" placeholder="Nội dung cần tư vấn"></textarea>
+          <button class="btn green" type="submit" id="cSubmitBtn">Gửi thông tin</button>
+          <p id="formMsg" style="margin-top: 10px; font-weight: 700;"></p>
+        </form>
+        <div class="contact-info reveal">
+          <h3>Thông tin liên hệ</h3>
+          <p><b>Website:</b> www.hanssip.net</p>
+          <p><b>Email:</b> sales@nggroup.vn</p>
+          <p><b>Hotline:</b> +84 985 122 233</p>
+          <p><b>GPS:</b> 13.0492456, 109.3390757</p>
+          <div class="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4315.178591319602!2d105.9146421!3d20.708342399999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135c9bc865257df%3A0x19af10cd10680502!2zSEFOU1NJUCBJbmR1c3RyaWFsIFBhcmsgLSBLaHUgY8O0bmcgbmdoaeG7h3AgaOG7lyB0cuG7oyB2w6AgxJHDtCB0aOG7iyBk4buLY2ggduG7pSBOYW0gSMOgIE7hu5lp!5e1!3m2!1svi!2s!4v1785773090612!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="minigame">
+    <div class="game-panel" id="gamePanel">
+      <h3>Chạm lá xanh - Nhận quà</h3>
+      <p class="game-sub">Điền thông tin để tham gia chương trình và có cơ hội nhận quà tặng từ HANSSIP ECOCITY.</p>
+      <div id="gameFormBox" class="game-layout">
+        <div class="gift-preview">
+          <h4>Danh sách quà tặng dành cho bạn</h4>
+          <div class="gift-preview-grid">
+            <div class="gift-item"><span>☕</span>Voucher Hanssip Café</div>
+            <div class="gift-item"><span>🛒</span>Voucher Hanssip Mart </div>
+            <div class="gift-item"><span>🥤</span>Bình giữ nhiệt cao cấp</div>
+            <div class="gift-item"><span>☂️</span>Ô (dù) cao cấp</div>
+          </div>
+        </div>
+        <div>
+          <div class="game-form-title">Đăng ký thông tin nhận quà</div>
+          <div class="game-input-group">
+            <label for="gameName">Họ và tên <span style="color:red">*</span></label>
+            <input id="gameName" name="name" autocomplete="name" type="text" placeholder="Ví dụ: Nguyễn Văn A">
+          </div>
+          <div class="game-input-group">
+            <label for="gamePhone">Số điện thoại <span style="color:red">*</span></label>
+            <input id="gamePhone" name="phone" autocomplete="tel" type="tel" placeholder="Ví dụ: 0985 123 456">
+          </div>
+          <div class="game-input-group">
+            <label for="gameEmail">Email <span style="color:red">*</span></label>
+            <input id="gameEmail" name="email" autocomplete="email" type="email" placeholder="Ví dụ: nguyenvana@gmail.com">
+          </div>
+          <div class="game-input-group">
+            <label for="gameNeed">Nhu cầu quan tâm <span style="color:red">*</span></label>
+            <select id="gameNeed" name="need">
+              <option value="">-- Chọn nhu cầu quan tâm --</option>
+              <option>Shophouse thương mại</option>
+              <option>Nhà phố liền kề</option>
+              <option>Biệt thự chuyên gia</option>
+              <option>Đầu tư tích sản</option>
+              <option>Khác</option>
+            </select>
+          </div>
+          <label class="game-check"><input type="checkbox" id="gameAgree" checked> Tôi đồng ý để HANSSIP ECOCITY liên hệ tư vấn.</label>
+          <button class="btn green" id="startGameBtn" style="width:100%; margin-top:8px;">Chạm lá xanh - Nhận quà ngay</button>
+        </div>
+      </div>
+      <div id="gamePlayBox" style="display:none">
+        <div class="wheel-wrapper">
+          <div class="wheel-pointer"></div>
+          <div class="wheel" id="wheel">
+            <svg viewBox="0 0 300 300">
+              <!-- Sector 1: Voucher Café (0° - 90°) -->
+              <path d="M 150 150 L 150 5 A 145 145 0 0 1 295 150 Z" fill="#f3c64c" />
+              <!-- Sector 2: Voucher Mart (90° - 180°) -->
+              <path d="M 150 150 L 295 150 A 145 145 0 0 1 150 295 Z" fill="#005c45" />
+              <!-- Sector 3: Bình Giữ Nhiệt (180° - 270°) -->
+              <path d="M 150 150 L 150 295 A 145 145 0 0 1 5 150 Z" fill="#f3c64c" />
+              <!-- Sector 4: Ô Dù HANSSIP (270° - 360°) -->
+              <path d="M 150 150 L 5 150 A 145 145 0 0 1 150 5 Z" fill="#005c45" />
+
+              <!-- Đường phân cách các ô -->
+              <line x1="150" y1="5" x2="150" y2="295" stroke="#ffffff" stroke-width="3" />
+              <line x1="5" y1="150" x2="295" y2="150" stroke="#ffffff" stroke-width="3" />
+
+              <!-- CHỮ HIỂN THỊ TRỰC TIẾP TRÊN VÒNG QUAY -->
+              <text x="215" y="85" transform="rotate(45 215 85)" text-anchor="middle" fill="#05382f" font-weight="900" font-size="13">☕ Voucher Café</text>
+              <text x="215" y="215" transform="rotate(-45 215 215)" text-anchor="middle" fill="#ffffff" font-weight="900" font-size="13">🛒 Voucher Mart</text>
+              <text x="85" y="215" transform="rotate(45 85 215)" text-anchor="middle" fill="#05382f" font-weight="900" font-size="12.5">🥤 Bình Giữ Nhiệt</text>
+              <text x="85" y="85" transform="rotate(-45 85 85)" text-anchor="middle" fill="#ffffff" font-weight="900" font-size="13">☂️ Ô Dù HANSSIP</text>
+            </svg>
+            <div class="wheel-center">QUAY</div>
+          </div>
+        </div>
+        <button class="btn green" id="spinBtn" style="width:100%; margin-top:10px;">Quay ngay</button>
+      </div>
+      <div id="gameResult" style="display:none"></div>
+      <p id="gameMsg" style="color:#e74c3c; font-weight:700; margin-top:10px;"></p>
+    </div><button class="game-btn" id="gameBtn"><span class="leaf-icon"><span>?</span></span><span
+        class="game-btn-text"><b>Chạm lá xanh</b>Nhận quà ngay</span></button>
+  </div><button class="toTop" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <div class="lightbox" id="lightbox"><span class="close" id="closeLb">×</span><img id="lbImg" src=""></div>
+  <script>
+    const GAME_PRIZES = [
+      { id: 1, name: "☕ Voucher Hanssip Café",  weight: 45, targetDeg: 315 }, 
+      { id: 2, name: "🛒 Voucher Hanssip Mart",  weight: 45, targetDeg: 225 },
+      { id: 3, name: "🥤 Bình giữ nhiệt cao cấp", weight: 5, targetDeg: 135 },
+      { id: 4, name: "☂️ Ô (dù) cao cấp HANSSIP", weight: 5, targetDeg: 45  } 
+    ];
+
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw8YC2_v7QiDoouAj1JrqZfpjvpWIidxRsZa3w9E4I-SgAJDsQzRGPsUQ6xVwarYs84ew/exec";
+
+    function sendToGoogleSheet(data) {
+      if (!GOOGLE_SCRIPT_URL) {
+        console.warn("Chưa dán URL Google Apps Script. Dữ liệu chưa gửi lên Google Sheets:", data);
+        return Promise.resolve();
+      }
+      return fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(data)
+      }).catch(err => console.error("Lỗi gửi Google Sheets:", err));
+    }
+
+    const slides = [...document.querySelectorAll('.slide')]; let si = 0; function showSlide(n) { slides[si].classList.remove('active'); si = (n + slides.length) % slides.length; slides[si].classList.add('active') } next.onclick = () => showSlide(si + 1); prev.onclick = () => showSlide(si - 1); setInterval(() => showSlide(si + 1), 5200);
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('show') }), { threshold: .16 }); document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    let counted = false; function countUp() { if (counted) return; const strip = document.querySelector('.stats-strip').getBoundingClientRect(); if (strip.top < innerHeight * .8) { counted = true; document.querySelectorAll('[data-count]').forEach(el => { let target = parseFloat(el.dataset.count), cur = 0, step = target / 70; let t = setInterval(() => { cur += step; if (cur >= target) { cur = target; clearInterval(t) } el.textContent = target % 1 ? cur.toFixed(1) : Math.floor(cur).toLocaleString('vi-VN') }, 18) }) } }
+    addEventListener('scroll', () => { progress.style.width = (scrollY / (document.body.scrollHeight - innerHeight) * 100) + '%'; countUp() }); countUp();
+    const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'); document.querySelectorAll('[data-img]').forEach(el => { el.addEventListener('dblclick', () => { lbImg.src = el.dataset.img; lb.classList.add('open') }) }); closeLb.onclick = () => lb.classList.remove('open'); lb.onclick = e => { if (e.target === lb) lb.classList.remove('open') }; addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open') });
+
+    const menuBtn = document.querySelector('.menu');
+    const navLinks = document.querySelector('.links');
+    
+    let navOverlay = document.querySelector('.nav-overlay');
+    if (!navOverlay) {
+      navOverlay = document.createElement('div');
+      navOverlay.className = 'nav-overlay';
+      document.body.appendChild(navOverlay);
+    }
+
+    function toggleMobileMenu() {
+      navLinks.classList.toggle('open');
+      navOverlay.classList.toggle('open');
+      if (menuBtn) menuBtn.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+    }
+
+    if (menuBtn) menuBtn.onclick = toggleMobileMenu;
+    if (navOverlay) navOverlay.onclick = toggleMobileMenu;
+    if (navLinks) {
+      navLinks.querySelectorAll('a').forEach(a => {
+        a.onclick = () => {
+          if (navLinks.classList.contains('open')) {
+            toggleMobileMenu();
+          }
+        };
+      });
+    }
+    
+    // FORM LIÊN HỆ TƯ VẤN
+    contactForm.onsubmit = e => { 
+      e.preventDefault(); 
+      formMsg.style.color = '#005c45'; 
+      formMsg.textContent = '⏳ Đang gửi thông tin...'; 
+      const payload = {
+        source: "Form Liên Hệ Tư Vấn",
+        fullname: document.getElementById('cName').value,
+        phone: document.getElementById('cPhone').value,
+        email: document.getElementById('cEmail').value || 'Không có',
+        need: document.getElementById('cNeed').value || 'Chưa chọn',
+        note: document.getElementById('cNote').value || '',
+        time: new Date().toLocaleString('vi-VN')
+      };
+      sendToGoogleSheet(payload).then(() => {
+        formMsg.textContent = '✅ Cảm ơn bạn đã quan tâm! Chúng tôi sẽ liên hệ với bạn sớm nhất có thể.'; 
+        contactForm.reset();
+      });
+    }; 
+    
+    gameBtn.onclick = () => gamePanel.classList.toggle('open');
+    const gameName = document.getElementById('gameName'), gamePhone = document.getElementById('gamePhone'), gameEmail = document.getElementById('gameEmail'), gameNeed = document.getElementById('gameNeed'), gameAgree = document.getElementById('gameAgree'), startGameBtn = document.getElementById('startGameBtn'), gameFormBox = document.getElementById('gameFormBox'), gamePlayBox = document.getElementById('gamePlayBox'), gameResult = document.getElementById('gameResult');
+    startGameBtn.onclick = () => { 
+      gameMsg.textContent = ''; 
+      if (!gameName.value.trim() || !gamePhone.value.trim() || !gameEmail.value.trim() || !gameNeed.value || !gameAgree.checked) { 
+        gameMsg.textContent = 'Vui lòng điền đầy đủ thông tin (Họ tên, SĐT, Email, Nhu cầu) và tích chọn đồng ý.'; 
+        return; 
+      } 
+      gameFormBox.style.display = 'none'; 
+      gamePlayBox.style.display = 'block'; 
+    };
+
+    function getRandomPrize() {
+      const totalWeight = GAME_PRIZES.reduce((sum, p) => sum + p.weight, 0);
+      let rand = Math.random() * totalWeight;
+      for (let i = 0; i < GAME_PRIZES.length; i++) {
+        if (rand < GAME_PRIZES[i].weight) {
+          return GAME_PRIZES[i];
+        }
+        rand -= GAME_PRIZES[i].weight;
+      }
+      return GAME_PRIZES[0];
+    }
+
+    let isSpinning = false;
+    spinBtn.onclick = () => { 
+      if (isSpinning) return;
+      isSpinning = true;
+      gameMsg.textContent = ''; 
+      
+      const wonPrize = getRandomPrize();
+      // Quay 5 vòng đầy (1800 độ) + góc dừng của quà
+      const totalDeg = 1800 + wonPrize.targetDeg;
+      const wheel = document.getElementById('wheel');
+      wheel.style.transform = `rotate(${totalDeg}deg)`; 
+      
+      setTimeout(() => { 
+        isSpinning = false;
+        gamePlayBox.style.display = 'none'; 
+        gameResult.style.display = 'block'; 
+        gameResult.innerHTML = `
+          <div class="game-result-title">🎉 CHÚC MỪNG BẠN!</div>
+          <p style="font-size:15px; margin:8px 0 14px;">Bạn đã trúng phần quà tuyệt vời từ HANSSIP ECOCITY:</p>
+          <div style="background:#f4f8f3; padding:16px; border-radius:16px; border:1px solid #cce2d5; margin-bottom:16px;">
+            <p style="font-size:20px; font-weight:900; color:var(--green); margin:0;">${wonPrize.name}</p>
+          </div>
+          <button class="btn green" id="confirmGiftBtn" style="width:100%;">✅ XÁC NHẬN NHẬN QUÀ</button>
+        `; 
+        
+        document.getElementById('confirmGiftBtn').onclick = () => { 
+          const gamePayload = {
+            source: "Minigame Chạm Lá Xanh",
+            fullname: gameName.value,
+            phone: gamePhone.value,
+            email: gameEmail.value,
+            need: gameNeed.value,
+            note: "Trúng quà: " + wonPrize.name,
+            time: new Date().toLocaleString('vi-VN')
+          };
+          sendToGoogleSheet(gamePayload);
+          gameResult.innerHTML = `
+            <div class="game-result-title">🎉 Ghi nhận thành công!</div>
+            <div class="thank-box" style="text-align:left; font-size:14.5px; line-height:1.6; padding:15px; background:#fff; border-radius:14px; border:1px solid #e2ece6;">
+              Chúc mừng bạn đã nhận phần quà: <b style="color:var(--green);">${wonPrize.name}</b>.<br><br>
+              📞 Bộ phận Kinh doanh HANSSIP Eco-City sẽ liên hệ tới số điện thoại <b>${gamePhone.value}</b> trong thời gian sớm nhất để xác nhận và trao quà.<br><br>
+              Xin chân thành cảm ơn!
+            </div>
+          `;
+        }; 
+      }, 4500); 
+    };
+  </script>
+</body>
+
+</html>
