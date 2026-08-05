@@ -61,6 +61,12 @@
       font-weight: 950;
       font-size: 18px;
       letter-spacing: 0.4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .brand span {
+      white-space: nowrap;
     }
 
     .brand img {
@@ -69,6 +75,7 @@
       object-fit: contain;
       display: block;
       border-radius: 8px;
+      flex-shrink: 0;
     }
 
     .btn-back {
@@ -83,6 +90,8 @@
       text-decoration: none;
       font-weight: 800;
       font-size: 13.5px;
+      white-space: nowrap;
+      flex-shrink: 0;
       transition: all 0.3s ease;
     }
 
@@ -305,7 +314,21 @@
     }
 
     @media (max-width: 680px) {
-      .page-hero { padding: 44px 0 36px; }
+      .navin {
+        height: 60px;
+      }
+      .brand {
+        gap: 8px;
+        font-size: 14.5px;
+      }
+      .brand img {
+        height: 36px;
+      }
+      .btn-back {
+        padding: 7px 13px;
+        font-size: 12px;
+      }
+      .page-hero { padding: 40px 0 32px; margin-top: 50px; }
       .page-hero h1 { font-size: 24px; }
       .cta-block { flex-direction: column; align-items: flex-start; }
     }
