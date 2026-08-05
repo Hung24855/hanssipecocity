@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HANSSIP GATEWAY (KHU B) - Shophouse Tâm Điểm Khu Đô Thị EcoCity</title>
+  <meta name="description" content="HANSSIP Gateway (Shophouse Khu B) là dòng sản phẩm nhà phố thương mại cao cấp được quy hoạch chiến lược tại tâm điểm Khu đô thị HANSSIP EcoCity.">
+  <link rel="icon" href="assets/images/001.png" type="image/png" />
+  <style>
+    :root {
+      --green: #005c45;
+      --dark-green: #02382c;
+      --gold: #f3c64c;
+      --dark: #0a1f1a;
+      --cream: #f9fbf8;
+      --text: #12392f;
+      --shadow: 0 16px 40px rgba(0, 60, 45, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Segoe UI", Arial, "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Segoe UI", Arial, "Helvetica Neue", sans-serif;
+    }
+
+    .container {
+      width: min(1080px, 92%);
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+    }
+
+    .navin {
+      height: 74px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--green);
+      font-weight: 950;
+      font-size: 18px;
+      letter-spacing: 0.4px;
+    }
+
+    .brand img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      border-radius: 8px;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 99px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 13.5px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-back:hover { background: var(--dark-green); }
+
+    .page-hero {
+      margin-top: 60px;
+      background: linear-gradient(135deg, var(--dark-green) 0%, #014534 55%, #01352a 100%);
+      padding: 56px 0 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(243, 198, 76, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .page-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--dark);
+      font-weight: 900;
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      padding: 5px 16px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(26px, 4vw, 44px);
+      font-weight: 900;
+      line-height: 1.2;
+      color: #fff;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .page-hero .subtitle {
+      font-size: 16px;
+      color: rgba(243, 198, 76, 0.9);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      max-width: 680px;
+      line-height: 1.5;
+    }
+
+    .page-hero .deco-line {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .page-hero .deco-line span {
+      display: inline-block;
+      height: 3px;
+      border-radius: 99px;
+    }
+
+    .page-hero .deco-line span:first-child { width: 48px; background: var(--gold); }
+    .page-hero .deco-line span:last-child  { width: 28px; background: rgba(243, 198, 76, 0.4); }
+
+    .article-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 50px 0 80px;
+    }
+
+    .content-block h2 {
+      font-size: 23px;
+      color: var(--green);
+      margin: 34px 0 14px;
+      font-weight: 800;
+      border-left: 4px solid var(--gold);
+      padding-left: 14px;
+    }
+
+    .content-block p {
+      font-size: 16px;
+      color: #12392f;
+      line-height: 1.78;
+      margin-bottom: 18px;
+    }
+
+    .featured-img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      margin: 24px 0;
+      display: block;
+    }
+
+    .info-list-box {
+      background: #ffffff;
+      border: 1px solid #dbe8e1;
+      border-radius: 18px;
+      padding: 24px;
+      margin: 20px 0 28px;
+      box-shadow: 0 4px 15px rgba(0, 60, 45, 0.05);
+    }
+
+    .info-list-box h3 {
+      font-size: 16px;
+      color: var(--green);
+      margin-bottom: 14px;
+      font-weight: 800;
+    }
+
+    .info-list-box ul { list-style: none; }
+
+    .info-list-box li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 12px;
+      font-size: 15px;
+      color: #12392f;
+      line-height: 1.55;
+    }
+
+    .info-list-box li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: var(--gold);
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .highlight-box {
+      background: #eef6f2;
+      border: 1px solid #c8e2d5;
+      border-radius: 18px;
+      padding: 26px;
+      margin: 32px 0;
+    }
+
+    .highlight-box h3 {
+      color: var(--green);
+      font-size: 19px;
+      margin-bottom: 16px;
+      font-weight: 800;
+    }
+
+    .highlight-box ul { list-style: none; }
+
+    .highlight-box li {
+      position: relative;
+      padding-left: 26px;
+      margin-bottom: 12px;
+      font-size: 15px;
+      color: #12392f;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .highlight-box li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .cta-block {
+      background: var(--dark-green);
+      border-radius: 20px;
+      padding: 30px 32px;
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cta-block p {
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .cta-block strong { color: var(--gold); display: block; font-size: 18px; margin-bottom: 4px; }
+
+    .btn-call {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gold);
+      color: var(--dark);
+      padding: 13px 26px;
+      border-radius: 99px;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 15px;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .btn-call:hover { opacity: 0.88; }
+
+    footer {
+      background: var(--dark-green);
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      padding: 24px 0;
+      font-size: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 680px) {
+      .page-hero { padding: 44px 0 36px; }
+      .page-hero h1 { font-size: 24px; }
+      .cta-block { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <div class="container navin">
+      <a class="brand" href="index.html#products">
+        <img src="assets/images/001.png" alt="Logo">
+        <span>HANSSIP ECOCITY</span>
+      </a>
+      <a href="index.html#products" class="btn-back">← Quay lại</a>
+    </div>
+  </nav>
+
+  <header class="page-hero">
+    <div class="container page-hero-inner">
+      <span class="hero-badge">Dòng sản phẩm Khu B</span>
+      <h1>HANSSIP GATEWAY (KHU B)</h1>
+      <p class="subtitle">HANSSIP GATEWAY (SHOPHOUSE): TÂM ĐIỂM GIAO THƯƠNG – CỬA NGÕ ĐÓN ĐẦU DÒNG KHÁCH</p>
+      <div class="deco-line"><span></span><span></span></div>
+    </div>
+  </header>
+
+  <main class="container article-wrapper">
+    <article class="content-block">
+      <p class="lead" style="font-size: 18px; font-weight: 700; color: var(--green);">
+        HANSSIP Gateway (Shophouse) là dòng sản phẩm nhà phố thương mại cao cấp được quy hoạch chiến lược tại tâm điểm Khu đô thị HANSSIP EcoCity – đô thị dịch vụ đồng bộ nằm liền kề Khu công nghiệp (KCN) Hỗ trợ Nam Hà Nội.
+      </p>
+
+      <p>
+        Sở hữu mô hình đột phá, HANSSIP GATEWAY đáp ứng trọn vẹn mọi nhu cầu: An cư lạc nghiệp, kinh doanh thịnh vượng và đầu tư sinh lời bền vững trong một cộng đồng năng động.
+      </p>
+
+      <img src="assets/images/013.jfif" alt="HANSSIP Gateway Khu B" class="featured-img">
+
+      <h2>Vị Trí Kim Cương – Đón Đầu Dòng Người & Dòng Tiền</h2>
+      <p>
+        HANSSIP GATEWAY sở hữu tọa độ độc tôn khi nằm trên các trục đường chính của khu đô thị, kết nối trực tiếp với các hạ tầng huyết mạch:
+      </p>
+
+      <div class="info-list-box">
+        <ul>
+          <li><b>ANSSIP GATEWAY :</b> Sở hữu tọa độ độc tôn khi nằm trên các trục đường chính của khu đô thị, kết nối trực tiếp với các hạ tầng huyết mạch.</li>
+          <li><b>Mặt tiền trục giao thông 20,5m:</b> Tuyến đường kết nối trực tiếp từ Bến xe Nước Ngầm đến Quốc lộ 1A mở rộng (rộng 90m).</li>
+          <li><b>Kết nối trực tiếp:</b> Liên kết thẳng tới dự án Đô thị Thể thao Quốc tế Hà Nội và KCN HANSSIP quy mô hàng trăm hecta.</li>
+          <li><b>Tiếp giáp đa tầng:</b> Một mặt tiếp giáp khu đô thị dịch vụ HANSSIP EcoCity, một mặt hướng thẳng ra trục đường lớn, tạo thành tọa độ giao thương lý tưởng đón trọn dòng lưu lượng khổng lồ từ hàng nghìn chuyên gia, kỹ sư và người lao động mỗi ngày.</li>
+         
+        </ul>
+      </div>
+
+      <p>
+        Dự án sở hữu dư địa khai thác vàng cho đa dạng loại hình kinh doanh: Chuỗi café, nhà hàng, siêu thị mini, văn phòng đại diện, showroom, spa, phòng khám hay căn hộ dịch vụ cho thuê.
+      </p>
+
+      <h2>Thiết Kế Thông Minh – Tối Ưu Hóa Công Năng Sử Dụng</h2>
+      <p>
+        Mỗi căn Shophouse được "đo ni đóng giày" với lối kiến trúc hiện đại, sở hữu các thông số vàng kinh doanh:
+      </p>
+
+      <div class="info-list-box">
+        <ul>
+          <li><b>Quy chuẩn xây dựng:</b> Thiết kế 3.5 tầng tối ưu diện tích.</li>
+          <li><b>Mặt tiền kép đắt giá:</b> Mặt tiền rộng tới 8m cùng thiết kế 2 mặt tiền thông thoáng, tăng tối đa khả năng tiếp cận khách hàng.</li>
+          <li><b>Quy hoạch không gian linh hoạt:</b> Tầng 1 tối ưu cho không gian kinh doanh hoặc cho thuê thương mại; các tầng trên đảm bảo không gian sinh hoạt riêng tư, biệt lập cho gia đình.</li>
+          <li><b>Hạ tầng đồng bộ:</b> Hệ thống đường nội khu rộng rãi, vỉa hè lớn kết hợp cùng cảnh quan xanh mướt và tiện ích hoàn chỉnh.</li>
+        </ul>
+      </div>
+
+      <!-- <img src="assets/images/012.jpg" alt="Cảnh quan không gian Khu B" class="featured-img"> -->
+
+      <h2>6 Giá Trị Vàng Tạo Nên Sức Hút Của HANSSIP GATEWAY (KHU B)</h2>
+      <div class="info-list-box">
+        <ul>
+          <li><b>Pháp lý vững chắc:</b> Sở hữu 50 năm, tài sản truyền đời giá trị.</li>
+          <li><b>Mô hình đa năng:</b> Sự kết hợp hoàn hảo giữa Kinh doanh – Cho thuê – An cư.</li>
+          <li><b>Tọa độ chiến lược:</b> Nằm sát khu liền kề KCN HANSSIP, đón đầu nguồn cầu lớn từ các chuyên gia quốc tế.</li>
+          <li><b>Vị trí cửa ngõ:</b> Kết nối trực tiếp các tuyến giao thông trọng điểm phía Nam Thủ đô.</li>
+          <li><b>Hạ tầng hoàn mỹ:</b> Thừa hưởng trọn vẹn hệ sinh thái tiện ích đẳng cấp từ Khu đô thị HANSSIP EcoCity.</li>
+          <li><b>Dư địa bứt phá:</b> Tiềm năng tăng giá phi mã theo tốc độ lấp đầy của khu công nghiệp.</li>
+        </ul>
+      </div>
+
+      <div class="cta-block">
+        <div>
+          <strong>Quan tâm đến HANSSIP GATEWAY (KHU B)?</strong>
+          <p>Liên hệ ngay để nhận bảng giá & mặt bằng chi tiết từ Chủ đầu tư.</p>
+        </div>
+        <a href="tel:+84368223331" class="btn-call">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.96-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          Gọi tư vấn ngay
+        </a>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 HANSSIP ECOCITY. Tất cả quyền được bảo lưu.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

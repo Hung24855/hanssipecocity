@@ -26,7 +26,7 @@
     }
 
     html {
-      scroll-behavior: smooth
+      scroll-padding-top: 74px;
     }
 
     body {
@@ -53,9 +53,14 @@
     }
 
     .section {
-      padding: 92px 0;
+      min-height: calc(100vh - 74px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 25px 0;
       position: relative;
-      overflow: hidden
+      overflow: hidden;
+      box-sizing: border-box;
     }
 
     .eyebrow {
@@ -71,7 +76,7 @@
       font-weight: 900;
       line-height: 1.05;
       color: var(--green);
-      margin: 10px 0 22px
+      margin: 4px 0 10px
     }
 
     .lead {
@@ -187,7 +192,7 @@
       align-items: center;
       color: #fff;
       background: #03382c;
-      overflow: hidden
+      overflow: hidden;
     }
 
     .slides {
@@ -246,7 +251,7 @@
       z-index: 3;
       padding: 90px 0;
       max-width: 900px;
-      transform: translate(-82px, 88px)
+      transform: translate(-82px, 10px)
     }
 
     .hero-text-bg {
@@ -321,9 +326,11 @@
     }
 
     .stats-strip {
-      position: relative;
+      position: absolute;
+      bottom: 28px;
+      left: 0;
+      right: 0;
       z-index: 5;
-      margin-top: -74px
     }
 
     .stats {
@@ -353,38 +360,150 @@
       background: linear-gradient(180deg, #fff, var(--cream))
     }
 
-    .table-card {
-      background: #096653;
-      color: #fff;
-      border-radius: 4px;
-      padding: 28px;
-      box-shadow: var(--shadow)
+    .overview-showcase {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 28px;
+      margin-top: 24px;
+      align-items: stretch;
     }
 
-    .project-table {
+    .overview-hero-card {
+      background: linear-gradient(145deg, #005c45 0%, #03382c 100%);
+      border-radius: 24px;
+      padding: 36px 32px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(243, 198, 76, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .overview-hero-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -50%;
       width: 100%;
-      border-collapse: collapse
+      height: 100%;
+      background: radial-gradient(circle, rgba(243, 198, 76, 0.15) 0%, transparent 70%);
+      pointer-events: none;
     }
 
-    .project-table th,
-    .project-table td {
-      border: 1px solid rgba(255, 255, 255, .7);
-      padding: 13px 16px;
-      text-align: left
+
+    .hero-card-title {
+      font-size: 22px;
+      font-weight: 950;
+      color: #ffffff;
+      line-height: 1.3;
+      margin-bottom: 12px;
     }
 
-    .project-table th {
-      width: 30%;
-      color: #fff;
-      font-weight: 900
+    .hero-card-desc {
+      font-size: 14.5px;
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.55;
+      margin-bottom: 24px;
     }
 
-    .project-table caption {
-      font-size: 42px;
-      font-family: Georgia, serif;
+    .hero-card-highlights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .hero-highlight {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      gap: 3px;
+    }
+
+    .hl-num {
+      font-size: 20px;
+      font-weight: 950;
       color: var(--gold);
-      font-weight: 800;
-      margin-bottom: 15px
+      line-height: 1.1;
+    }
+
+    .hl-lbl {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 700;
+    }
+
+    .overview-dossier {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: 0 16px 45px rgba(0, 60, 45, 0.08);
+      border: 1px solid rgba(0, 92, 69, 0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid #e2eee7;
+      box-shadow: 0 2px 6px rgba(0, 60, 45, 0.03);
+      transition: all 0.25s ease;
+    }
+
+    .dossier-row:hover {
+      background: #f4fbf7;
+      border-color: var(--green);
+      box-shadow: 0 6px 18px rgba(0, 92, 69, 0.08);
+      transform: translateX(4px);
+    }
+
+    .dossier-label {
+      font-size: 11.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #947116;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dossier-label::before {
+      content: "◆";
+      font-size: 8px;
+      color: var(--gold);
+    }
+
+    .dossier-val {
+      font-size: 15px;
+      font-weight: 400;
+      color: #0c2d24;
+      line-height: 1.45;
+    }
+
+    .dossier-val.highlight {
+      color: var(--green);
+      font-weight: 950;
+    }
+
+    @media (max-width: 650px) {
+      .dossier-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 10px 14px;
+      }
     }
 
     .location {
@@ -665,32 +784,50 @@
     .adv-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px
+      gap: 16px;
+      margin-top: 20px;
     }
 
     .adv {
       background: rgba(255, 255, 255, .10);
       border: 1px solid rgba(255, 255, 255, .18);
-      border-radius: 24px;
-      padding: 28px;
-      transition: .35s
+      border-radius: 18px;
+      padding: 18px 20px;
+      transition: .35s;
+      display: flex;
+      flex-direction: column;
     }
 
     .adv:hover {
-      transform: translateY(-12px);
-      background: rgba(255, 255, 255, .16)
+      transform: translateY(-6px);
+      background: rgba(255, 255, 255, .16);
     }
 
     .adv b {
-      display: grid;
+      display: inline-grid;
       place-items: center;
-      width: 52px;
-      height: 52px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: var(--gold);
       color: var(--green);
-      font-size: 24px;
-      margin-bottom: 14px
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .adv h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .adv p {
+      font-size: 15px;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.88);
+      margin: 0;
     }
 
     .plan-grid {
@@ -732,11 +869,11 @@
 
     .prod-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
       margin-top: 30px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .prod-grid {
         grid-template-columns: 1fr;
       }
@@ -760,7 +897,7 @@
     }
 
     .prod img {
-      height: 340px;
+      height: 260px;
       width: 100%;
       object-fit: cover;
       object-position: top center;
@@ -772,6 +909,21 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+    }
+
+    .prod-more {
+      display: inline-block;
+      margin-top: auto;
+      padding-top: 14px;
+      font-size: 13.5px;
+      font-weight: 850;
+      color: var(--green);
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    .prod:hover .prod-more {
+      transform: translateX(6px);
+      color: var(--gold);
     }
 
     .ownership {
@@ -866,7 +1018,7 @@
     }
 
     .util img {
-      height: 210px;
+      height: 165px;
       width: 100%;
       object-fit: cover;
       object-position: center;
@@ -1043,14 +1195,19 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 20px;
-      align-items: start
+      align-items: stretch;
     }
 
     .gift-preview {
       background: linear-gradient(135deg, #f7fff3, #fff8d7);
       border: 1px solid #d8eadf;
       border-radius: 22px;
-      padding: 18px
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-sizing: border-box;
+      height: 100%;
     }
 
     .gift-preview h4 {
@@ -1213,16 +1370,104 @@
       position: fixed;
       left: 22px;
       bottom: 22px;
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       border: none;
       background: var(--green);
       color: #fff;
-      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
       z-index: 998;
-      box-shadow: var(--shadow)
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toTop.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .toTop:hover {
+      background: var(--green2);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0, 60, 45, 0.25);
+    }
+
+    .toTop:active {
+      transform: translateY(-1px);
+    }
+
+    .scroll-indicators {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      z-index: 10000;
+      background: rgba(5, 56, 47, 0.45);
+      padding: 18px 8px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .scroll-indicator-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .scroll-indicator-dot.active {
+      background: var(--gold);
+      height: 20px;
+      border-radius: 4px;
+      box-shadow: 0 0 12px var(--gold);
+    }
+
+    .scroll-indicator-dot::after {
+      content: attr(data-title);
+      position: absolute;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%) translateX(10px);
+      background: rgba(5, 56, 47, 0.95);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .scroll-indicator-dot:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    .scroll-indicator-dot:hover {
+      background: #fff;
     }
 
     .game-check {
@@ -1507,27 +1752,48 @@
       }
 
       .stats-strip {
-        margin-top: 20px
+        position: relative;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        margin-top: 20px;
       }
 
       .section {
-        padding: 68px 0
+        min-height: auto;
+        padding: 50px 0;
       }
 
       .hero {
         min-height: 86vh
       }
 
-      .project-table th,
-      .project-table td {
-        display: block;
-        width: 100%
+      .overview-showcase {
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
+      .hero-card-highlights {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .overview-dossier {
+        padding: 18px 16px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .hero-card-highlights {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .overview-hero-card {
+        padding: 24px 20px;
+      }
+    }
 
       .image-card img {
         height: 300px
       }
-    }
+    
   </style>
 </head>
 
@@ -1535,8 +1801,8 @@
   <div class="progress" id="progress"></div>
   <nav class="nav">
     <div class="container navin"><a class="brand" href="#top"><img src="assets/images/001.png" alt="Logo"><span>HANSSIP ECOCITY</span></a>
-      <div class="links"><a href="#overview">Tổng quan</a><a href="#location">Vị trí</a><a href="#products">Sản
-          phẩm</a><a href="#utilities">Tiện ích</a><a href="#legal">Pháp lý</a><a href="#contact">Liên hệ</a></div>
+      <div class="links"><a href="#overview">TỔNG QUAN</a><a href="#location">VỊ TRÍ</a><a href="#products">SẢN
+          PHẢM</a><a href="#utilities">TIỆN ÍCH</a><a href="#legal">PHÁP LÝ</a><a href="#contact">LIÊN HỆ</a></div>
       <button class="menu">☰</button>
     </div>
   </nav>
@@ -1554,64 +1820,80 @@
         <h1>HANSSIP ECOCITY</h1>
         <p>Sống xanh - làm việc thuận tiện - kinh doanh thịnh vượng trong hệ sinh thái công nghiệp, đô thị và dịch vụ
           đồng bộ phía Nam Hà Nội.</p>
-        <div class="hero-actions"><a class="btn" href="#contact">Liên hệ tư vấn</a><a class="btn green"
+        <div class="hero-actions"><a class="btn" href="tel:+84368223331">Liên hệ tư vấn</a><a class="btn green"
             href="#overview">Khám phá dự án</a></div>
       </div>
     </div>
-  </header>
-  <div class="stats-strip">
-    <div class="container stats">
-      <div class="stat"><strong><span data-count="100">0</span> ha</strong>Tổng diện tích</div>
-      <div class="stat"><strong>+<span data-count="40">0</span></strong>Tiện ích đồng bộ</div>
-      <div class="stat"><strong><span data-count="3.7">0</span> ha</strong>Trung tâm xanh</div>
-      <div class="stat">Chuẩn sống<strong>ESG++</strong></div>
-      <div class="stat"><strong>+<span data-count="22000">0</span></strong>Cư dân</div>
+    <div class="stats-strip">
+      <div class="container stats">
+        <div class="stat"><strong><span data-count="100">0</span> ha</strong>Tổng diện tích</div>
+        <div class="stat"><strong>+<span data-count="40">0</span></strong>Tiện ích đồng bộ</div>
+        <div class="stat"><strong><span data-count="3.7">0</span> ha</strong>Trung tâm xanh</div>
+        <div class="stat">Chuẩn sống<strong>ESG++</strong></div>
+        <div class="stat"><strong>+<span data-count="22000">0</span></strong>Cư dân</div>
+      </div>
     </div>
-  </div>
+  </header>
   <section class="section overview" id="overview">
     <div class="container">
       <div class="eyebrow reveal">Tổng quan dự án</div>
       <h2 class="title reveal">HANSSIP ECOCITY</h2>
-      <div class="table-card reveal">
-        <table class="project-table">
-          <caption>HANSSIP ECOCITY</caption>
-          <tr>
-            <th>Tên dự án</th>
-            <td>HANSSIP ECOCITY</td>
-          </tr>
-          <tr>
-            <th>Vị trí</th>
-            <td>Khu công nghiệp hỗ trợ Nam Hà Nội, xã Đại Xuyên, TP. Hà Nội</td>
-          </tr>
-          <tr>
-            <th>Chủ đầu tư</th>
-            <td>Công ty CP Đầu tư - Phát triển N&G</td>
-          </tr>
-          <tr>
-            <th>Tổng diện tích quy hoạch</th>
-            <td>Giai đoạn 1: 100ha</td>
-          </tr>
-          <tr>
-            <th>Tổng mức đầu tư</th>
-            <td>~ 1 tỷ USD</td>
-          </tr>
-          <tr>
-            <th>Quy mô dân số</th>
-            <td>~ 22.000 người</td>
-          </tr>
-          <tr>
-            <th>Loại hình phát triển</th>
-            <td>Khu phức hợp đa năng: Đô thị thương mại - Dịch vụ</td>
-          </tr>
-          <tr>
-            <th>Sản phẩm</th>
-            <td>Nhà phố liền kề, nhà phố thương mại shophouse, nhà chuyên gia, nhà công nhân</td>
-          </tr>
-          <tr>
-            <th>Pháp lý</th>
-            <td>Sở hữu lâu dài</td>
-          </tr>
-        </table>
+      <div class="overview-showcase reveal">
+        <!-- Left Hero Architectural Card -->
+        <div class="overview-hero-card">
+          <div>
+            <h3 class="hero-card-title">Khu Đô Thị Dịch Vụ Thương Mại HANSSIP ECOCITY</h3>
+            <p class="hero-card-desc">Quần thể không gian sống xanh - kinh doanh thịnh vượng - an cư bền vững hàng đầu phía Nam Hà Nội.</p>
+          </div>
+          
+          <div class="hero-card-highlights">
+            <div class="hero-highlight">
+              <span class="hl-num">100 ha</span>
+              <span class="hl-lbl">Quy mô Giai đoạn 1</span>
+            </div>
+            <div class="hero-highlight">
+              <span class="hl-num">~1 Tỷ USD</span>
+              <span class="hl-lbl">Tổng vốn đầu tư</span>
+            </div>
+            <div class="hero-highlight">
+              <span class="hl-num">Sổ Đỏ</span>
+              <span class="hl-lbl">Sở hữu lâu dài</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Editorial Specs Dossier -->
+        <div class="overview-dossier">
+          <div class="dossier-row">
+            <span class="dossier-label">Tên chính thức</span>
+            <span class="dossier-val highlight">Khu đô thị HANSSIP ECOCITY</span>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Chủ đầu tư</span>
+            <span class="dossier-val">Công ty CP Đầu tư - Phát triển N&G</span>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Vị trí địa lý</span>
+            <span class="dossier-val">Liền kề Khu công nghiệp Hỗ trợ Nam Hà Nội, xã Đại Xuyên, TP.Hà Nội</span>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Diện tích quy hoạch</span>
+            <span class="dossier-val">Thuộc quần thể KCN Hỗ trợ Nam Hà Nội giai đoạn 1 (quy mô 100ha)</span>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Quy mô dân số</span>
+            <span class="dossier-val">~ 22.000 cư dân</span>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Loại hình phát triển</span>
+            <span class="dossier-val">Khu phức hợp đa năng: Đô thị thương mại - Dịch vụ - Đô thị liền kề KCN</span>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Dòng sản phẩm</span>
+            <span class="dossier-val">Nhà phố liền kề, Nhà phố thương mại Shophouse, Nhà chuyên gia, Nhà ở công nhân</span>
+          </div>
+          
+        </div>
       </div>
     </div>
   </section>
@@ -1717,7 +1999,7 @@
   <section class="section">
     <div class="container">
       <div class="eyebrow reveal">Mặt bằng tổng thể</div>
-      <h2 class="title reveal">Mặt bằng tổng thể khu đô thị HANSSIP ECOCITY</h2>
+      <h2 class="title reveal">KHU ĐÔ THỊ HANSSIP ECOCITY</h2>
       <div class="plan-grid">
         <div class="image-card reveal" data-img="assets/images/006.jpg"><img src="assets/images/006.jpg">
         </div>
@@ -1727,21 +2009,33 @@
   </section>
   <section class="section products" id="products">
     <div class="container">
-      <div class="eyebrow reveal">Sản phẩm</div>
-      <h2 class="title reveal">Dòng sản phẩm tại HANSSIP ECOCITY</h2>
+      <div class="eyebrow reveal">SẢN PHẨM TẠI</div>
+      <h2 class="title reveal">KHU ĐÔ THỊ HANSSIP ECOCITY</h2>
       <div class="prod-grid">
-        <div class="prod reveal" data-img="assets/images/product1.jpg"><img src="assets/images/product1.jpg" alt="HANSSIP Townhouse">
+        <a class="prod reveal" href="nha-pho-thuong-mai.html" style="text-decoration: none; color: inherit;">
+          <img src="assets/images/product1.jpg" alt="HANSSIP ECOCITY: NHÀ PHỐ THƯƠNG MẠI">
           <div class="prod-body">
-            <h3>HANSSIP Townhouse</h3>
-            <p>Nhà phố thương mại, phù hợp an cư và khai thác kinh doanh.</p>
+            <h3>HANSSIP ECOCITY: NHÀ PHỐ THƯƠNG MẠI</h3>
+            <p>Tâm Điểm An Cư Lạc Nghiệp & Giao Thương Khởi Sắc</p>
+            <span class="prod-more">Xem chi tiết →</span>
           </div>
-        </div>
-        <div class="prod reveal" data-img="assets/images/008.jpg"><img src="assets/images/008.jpg" alt="HANSSIP Gateway">
+        </a>
+        <a class="prod reveal" href="hanssip-gateway-khu-a.html" style="text-decoration: none; color: inherit;">
+          <img src="assets/images/008.jpg" alt="HANSSIP GATEWAY (KHU A)">
           <div class="prod-body">
-            <h3>HANSSIP Gateway</h3>
-            <p>Phố thương mại cổng KCN, đón dòng chuyên gia và người lao động.</p>
+            <h3>HANSSIP GATEWAY (KHU A)</h3>
+            <p>HANSSIP Gateway (Shophouse) là đại lộ thương mại cao cấp được quy hoạch chiến lược tại cửa ngõ Khu công nghiệp (KCN) Hỗ trợ Nam Hà Nội.</p>
+            <span class="prod-more">Xem chi tiết →</span>
           </div>
-        </div>
+        </a>
+        <a class="prod reveal" href="hanssip-gateway-khu-b.html" style="text-decoration: none; color: inherit;">
+          <img src="assets/images/013.jfif" alt="HANSSIP GATEWAY (KHU B)">
+          <div class="prod-body">
+            <h3>HANSSIP GATEWAY (KHU B)</h3>
+            <p>HANSSIP Gateway (Shophouse) là dòng sản phẩm nhà phố thương mại cao cấp được quy hoạch chiến lược tại tâm điểm Khu đô thị HANSSIP EcoCity – đô thị dịch vụ đồng bộ nằm liền kề Khu công nghiệp (KCN) Hỗ trợ Nam Hà Nội</p>
+            <span class="prod-more">Xem chi tiết →</span>
+          </div>
+        </a>
       </div>
     </div>
   </section>
@@ -1787,7 +2081,7 @@
         <div class="util reveal" data-img="assets/images/012.jpg"><img src="assets/images/012.jpg" alt="Công viên cây xanh">
           <p>Công viên cây xanh</p>
         </div>
-        <div class="util reveal" data-img="assets/images/013.jpg"><img src="assets/images/013.jpg" alt="Không gian thể thao">
+        <div class="util reveal" data-img="assets/images/013.jfif"><img src="assets/images/013.jfif" alt="Không gian thể thao">
           <p>Không gian thể thao</p>
         </div>
         <div class="util reveal" data-img="assets/images/014.jpg"><img src="assets/images/014.jpg" alt="Trung tâm chăm sóc sức khỏe">
@@ -1820,7 +2114,7 @@
       <div class="eyebrow reveal">HANSSIP ECOCITY</div>
       <h2 class="title reveal" style="color:#fff">Liên hệ ngay để nhận tư vấn chi tiết</h2>
       <p class="lead reveal" style="margin:auto">Khám phá cơ hội an cư, kinh doanh và đầu tư tại khu đô thị dịch vụ
-        thương mại liền kề KCN HANSSIP.</p><br><a href="#contact" class="btn">Liên hệ tư vấn</a>
+        thương mại liền kề KCN HANSSIP.</p><br><a href="tel:+84368223331" class="btn">Liên hệ tư vấn</a>
     </div>
   </section>
   <section class="section contact" id="contact">
@@ -1833,20 +2127,25 @@
           <input id="cPhone" name="phone" autocomplete="tel" type="tel" placeholder="Số điện thoại *" required>
           <input id="cEmail" name="email" autocomplete="email" type="email" placeholder="Email">
           <select id="cNeed" name="need">
-            <option value="">Nhu cầu quan tâm</option>
-            <option>Nhà phố liền kề</option>
-            <option>Shophouse</option>
-            <option>Hợp tác kinh doanh tiện ích</option>
+            <option value="">-- Chọn nhu cầu quan tâm --</option>
+              <option>Shophouse thương mại</option>
+              <option>Nhà phố liền kề</option>
+              <option>Hợp tác kinh doanh tên ích</option>
+              <option>Đầu tư tích sản</option>
+              <option>Khác</option>
           </select>
           <textarea id="cNote" name="note" placeholder="Nội dung cần tư vấn"></textarea>
-          <button class="btn green" type="submit" id="cSubmitBtn">Gửi thông tin</button>
-          <p id="formMsg" style="margin-top: 10px; font-weight: 700;"></p>
+          <button class="btn green" type="submit" id="cSubmitBtn" style="display: flex; align-items: center; justify-content: center; gap: 10px; width: min(320px, 100%); margin: 16px auto 0; padding: 14px 32px; font-size: 16px; font-weight: 800; border-radius: 99px;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            <span>Gửi thông tin</span>
+          </button>
+          <p id="formMsg" style="margin-top: 10px; font-weight: 700; text-align: center;"></p>
         </form>
         <div class="contact-info reveal">
           <h3>Thông tin liên hệ</h3>
           <p><b>Website:</b> www.hanssip.net</p>
           <p><b>Email:</b> sales@nggroup.vn</p>
-          <p><b>Hotline:</b> +84 985 122 233</p>
+          <p><b>Hotline:</b> <a href="tel:+84368223331" style="color:inherit; text-decoration:none;">+84 36 822 3331</a></p>
           <p><b>GPS:</b> 13.0492456, 109.3390757</p>
           <div class="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4315.178591319602!2d105.9146421!3d20.708342399999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135c9bc865257df%3A0x19af10cd10680502!2zSEFOU1NJUCBJbmR1c3RyaWFsIFBhcmsgLSBLaHUgY8O0bmcgbmdoaeG7h3AgaOG7lyB0cuG7oyB2w6AgxJHDtCB0aOG7iyBk4buLY2ggduG7pSBOYW0gSMOgIE7hu5lp!5e1!3m2!1svi!2s!4v1785773090612!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
         </div>
@@ -1855,8 +2154,6 @@
   </section>
   <div class="minigame">
     <div class="game-panel" id="gamePanel">
-      <h3>Chạm lá xanh - Nhận quà</h3>
-      <p class="game-sub">Điền thông tin để tham gia chương trình và có cơ hội nhận quà tặng từ HANSSIP ECOCITY.</p>
       <div id="gameFormBox" class="game-layout">
         <div class="gift-preview">
           <h4>Danh sách quà tặng dành cho bạn</h4>
@@ -1868,7 +2165,8 @@
           </div>
         </div>
         <div>
-          <div class="game-form-title">Đăng ký thông tin nhận quà</div>
+          <h3>Đăng ký thông tin nhận quà</h3>
+          <p class="game-sub">Điền thông tin để tham gia chương trình và có cơ hội nhận quà tặng từ HANSSIP ECOCITY.</p>
           <div class="game-input-group">
             <label for="gameName">Họ và tên <span style="color:red">*</span></label>
             <input id="gameName" name="name" autocomplete="name" type="text" placeholder="Ví dụ: Nguyễn Văn A">
@@ -1887,7 +2185,7 @@
               <option value="">-- Chọn nhu cầu quan tâm --</option>
               <option>Shophouse thương mại</option>
               <option>Nhà phố liền kề</option>
-              <option>Biệt thự chuyên gia</option>
+              <option>Hợp tác kinh doanh tên ích</option>
               <option>Đầu tư tích sản</option>
               <option>Khác</option>
             </select>
@@ -1929,7 +2227,12 @@
       <p id="gameMsg" style="color:#e74c3c; font-weight:700; margin-top:10px;"></p>
     </div><button class="game-btn" id="gameBtn"><span class="leaf-icon"><span>?</span></span><span
         class="game-btn-text"><b>Chạm lá xanh</b>Nhận quà ngay</span></button>
-  </div><button class="toTop" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+  </div><button class="toTop" id="toTopBtn">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="19" x2="12" y2="5"></line>
+      <polyline points="5 12 12 5 19 12"></polyline>
+    </svg>
+  </button>
   <div class="lightbox" id="lightbox"><span class="close" id="closeLb">×</span><img id="lbImg" src=""></div>
   <script>
     const GAME_PRIZES = [
@@ -1955,9 +2258,60 @@
     }
 
     const slides = [...document.querySelectorAll('.slide')]; let si = 0; function showSlide(n) { slides[si].classList.remove('active'); si = (n + slides.length) % slides.length; slides[si].classList.add('active') } next.onclick = () => showSlide(si + 1); prev.onclick = () => showSlide(si - 1); setInterval(() => showSlide(si + 1), 5200);
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('show') }), { threshold: .16 }); document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-    let counted = false; function countUp() { if (counted) return; const strip = document.querySelector('.stats-strip').getBoundingClientRect(); if (strip.top < innerHeight * .8) { counted = true; document.querySelectorAll('[data-count]').forEach(el => { let target = parseFloat(el.dataset.count), cur = 0, step = target / 70; let t = setInterval(() => { cur += step; if (cur >= target) { cur = target; clearInterval(t) } el.textContent = target % 1 ? cur.toFixed(1) : Math.floor(cur).toLocaleString('vi-VN') }, 18) }) } }
-    addEventListener('scroll', () => { progress.style.width = (scrollY / (document.body.scrollHeight - innerHeight) * 100) + '%'; countUp() }); countUp();
+    const io = new IntersectionObserver(es => es.forEach(e => { 
+      if (e.isIntersecting) {
+        e.target.classList.add('show');
+      } else {
+        const rect = e.target.getBoundingClientRect();
+        if (rect.top > window.innerHeight) {
+          e.target.classList.remove('show');
+        }
+      }
+    }), { threshold: .16 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    let counted = false;
+    const statsStrip = document.querySelector('.stats-strip');
+    if (statsStrip) {
+      const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !counted) {
+            counted = true;
+            document.querySelectorAll('[data-count]').forEach(el => {
+              let target = parseFloat(el.dataset.count), cur = 0, step = target / 70;
+              let t = setInterval(() => {
+                cur += step;
+                if (cur >= target) {
+                  cur = target;
+                  clearInterval(t);
+                }
+                el.textContent = target % 1 ? cur.toFixed(1) : Math.floor(cur).toLocaleString('vi-VN');
+              }, 18);
+            });
+            statsObserver.unobserve(statsStrip);
+          }
+        });
+      }, { threshold: 0.1 });
+      statsObserver.observe(statsStrip);
+    }
+    
+    const toTop = document.getElementById('toTopBtn');
+    if (toTop) {
+      toTop.onclick = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+    }
+
+    addEventListener('scroll', () => { 
+      progress.style.width = (scrollY / (document.body.scrollHeight - innerHeight) * 100) + '%'; 
+      if (toTop) {
+        if (scrollY > 300) {
+          toTop.classList.add('show');
+        } else {
+          toTop.classList.remove('show');
+        }
+      }
+    });
     const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'); document.querySelectorAll('[data-img]').forEach(el => { el.addEventListener('dblclick', () => { lbImg.src = el.dataset.img; lb.classList.add('open') }) }); closeLb.onclick = () => lb.classList.remove('open'); lb.onclick = e => { if (e.target === lb) lb.classList.remove('open') }; addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open') });
 
     const menuBtn = document.querySelector('.menu');
@@ -2008,7 +2362,15 @@
       });
     }; 
     
-    gameBtn.onclick = () => gamePanel.classList.toggle('open');
+    gameBtn.onclick = (e) => {
+      e.stopPropagation();
+      gamePanel.classList.toggle('open');
+    };
+    document.addEventListener('click', (e) => {
+      if (gamePanel.classList.contains('open') && !gamePanel.contains(e.target)) {
+        gamePanel.classList.remove('open');
+      }
+    });
     const gameName = document.getElementById('gameName'), gamePhone = document.getElementById('gamePhone'), gameEmail = document.getElementById('gameEmail'), gameNeed = document.getElementById('gameNeed'), gameAgree = document.getElementById('gameAgree'), startGameBtn = document.getElementById('startGameBtn'), gameFormBox = document.getElementById('gameFormBox'), gamePlayBox = document.getElementById('gamePlayBox'), gameResult = document.getElementById('gameResult');
     startGameBtn.onclick = () => { 
       gameMsg.textContent = ''; 
@@ -2048,37 +2410,221 @@
         isSpinning = false;
         gamePlayBox.style.display = 'none'; 
         gameResult.style.display = 'block'; 
+        
+        const gamePayload = {
+          source: "Minigame Chạm Lá Xanh",
+          fullname: gameName.value,
+          phone: gamePhone.value,
+          email: gameEmail.value,
+          need: gameNeed.value,
+          note: "Trúng quà: " + wonPrize.name,
+          time: new Date().toLocaleString('vi-VN')
+        };
+        sendToGoogleSheet(gamePayload);
+
         gameResult.innerHTML = `
           <div class="game-result-title">🎉 CHÚC MỪNG BẠN!</div>
           <p style="font-size:15px; margin:8px 0 14px;">Bạn đã trúng phần quà tuyệt vời từ HANSSIP ECOCITY:</p>
           <div style="background:#f4f8f3; padding:16px; border-radius:16px; border:1px solid #cce2d5; margin-bottom:16px;">
             <p style="font-size:20px; font-weight:900; color:var(--green); margin:0;">${wonPrize.name}</p>
           </div>
-          <button class="btn green" id="confirmGiftBtn" style="width:100%;">✅ XÁC NHẬN NHẬN QUÀ</button>
-        `; 
-        
-        document.getElementById('confirmGiftBtn').onclick = () => { 
-          const gamePayload = {
-            source: "Minigame Chạm Lá Xanh",
-            fullname: gameName.value,
-            phone: gamePhone.value,
-            email: gameEmail.value,
-            need: gameNeed.value,
-            note: "Trúng quà: " + wonPrize.name,
-            time: new Date().toLocaleString('vi-VN')
-          };
-          sendToGoogleSheet(gamePayload);
-          gameResult.innerHTML = `
-            <div class="game-result-title">🎉 Ghi nhận thành công!</div>
-            <div class="thank-box" style="text-align:left; font-size:14.5px; line-height:1.6; padding:15px; background:#fff; border-radius:14px; border:1px solid #e2ece6;">
-              Chúc mừng bạn đã nhận phần quà: <b style="color:var(--green);">${wonPrize.name}</b>.<br><br>
-              📞 Bộ phận Kinh doanh HANSSIP Eco-City sẽ liên hệ tới số điện thoại <b>${gamePhone.value}</b> trong thời gian sớm nhất để xác nhận và trao quà.<br><br>
-              Xin chân thành cảm ơn!
-            </div>
-          `;
-        }; 
+          <div class="thank-box" style="text-align:left; font-size:14.5px; line-height:1.6; padding:15px; background:#fff; border-radius:14px; border:1px solid #e2ece6;">
+            Chúc mừng bạn đã nhận phần quà: <b style="color:var(--green);">${wonPrize.name}</b>.<br><br>
+            📞 Bộ phận Kinh doanh HANSSIP Eco-City sẽ liên hệ tới số điện thoại <b>${gamePhone.value}</b> trong thời gian sớm nhất để xác nhận và trao quà.<br><br>
+            Xin chân thành cảm ơn!
+          </div>
+        `;
       }, 4500); 
     };
+
+    const scrollTargets = [document.querySelector('.hero'), ...document.querySelectorAll('.section')].filter(Boolean);
+    let currentTargetIndex = 0;
+    let isTransitioning = false;
+
+    // Generate indicators dynamically
+    const indicatorsContainer = document.createElement('div');
+    indicatorsContainer.className = 'scroll-indicators';
+    document.body.appendChild(indicatorsContainer);
+
+    const dots = [];
+    scrollTargets.forEach((target, index) => {
+      const dot = document.createElement('div');
+      dot.className = 'scroll-indicator-dot';
+      if (index === 0) dot.classList.add('active');
+      
+      let title = "Phần " + (index + 1);
+      const eyebrow = target.querySelector('.eyebrow');
+      if (eyebrow) {
+        title = eyebrow.textContent.trim();
+      } else {
+        const titleEl = target.querySelector('.title');
+        if (titleEl) title = titleEl.textContent.trim();
+      }
+      if (target.id === 'top') title = 'Đầu trang';
+      dot.setAttribute('data-title', title);
+
+      dot.onclick = () => {
+        scrollToSection(index);
+      };
+      
+      indicatorsContainer.appendChild(dot);
+      dots.push(dot);
+    });
+
+    function updateActiveDot(index) {
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function updateCurrentIndexFromScroll() {
+      if (isTransitioning) return;
+      const scrollPos = window.scrollY + 80;
+      let closestIndex = 0;
+      let minDiff = Infinity;
+      scrollTargets.forEach((target, index) => {
+        const diff = Math.abs(target.offsetTop - scrollPos);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closestIndex = index;
+        }
+      });
+      currentTargetIndex = closestIndex;
+      updateActiveDot(closestIndex);
+    }
+
+    function scrollToSection(index) {
+      if (index < 0 || index >= scrollTargets.length) return;
+      isTransitioning = true;
+      currentTargetIndex = index;
+      updateActiveDot(index);
+      
+      const targetOffset = scrollTargets[index].offsetTop - 74;
+      window.scrollTo({
+        top: targetOffset,
+        behavior: 'smooth'
+      });
+
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 800);
+    }
+
+    window.addEventListener('wheel', (e) => {
+      if (document.querySelector('.lightbox.open') || document.querySelector('.game-panel.open') || document.querySelector('.links.open')) {
+        return;
+      }
+      
+      if (isTransitioning) {
+        e.preventDefault();
+        return;
+      }
+
+      const currentTarget = scrollTargets[currentTargetIndex];
+      if (!currentTarget) return;
+
+      const navHeight = 74;
+      const windowHeight = window.innerHeight;
+      const currentScrollTop = window.scrollY;
+      const targetTop = currentTarget.offsetTop - navHeight;
+      const targetBottom = currentTarget.offsetTop + currentTarget.offsetHeight;
+
+      if (e.deltaY > 0) {
+        // Scrolling DOWN: only snap if bottom of current section is reached
+        if (currentScrollTop + windowHeight < targetBottom - 25) {
+          return; // Allow internal scrolling
+        }
+        e.preventDefault();
+        if (currentTargetIndex < scrollTargets.length - 1) {
+          scrollToSection(currentTargetIndex + 1);
+        }
+      } else if (e.deltaY < 0) {
+        // Scrolling UP: only snap if top of current section is reached
+        if (currentScrollTop > targetTop + 25) {
+          return; // Allow internal scrolling
+        }
+        e.preventDefault();
+        if (currentTargetIndex > 0) {
+          scrollToSection(currentTargetIndex - 1);
+        }
+      }
+    }, { passive: false });
+
+    let tsY = 0;
+    window.addEventListener('touchstart', (e) => {
+      tsY = e.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (document.querySelector('.lightbox.open') || document.querySelector('.game-panel.open') || document.querySelector('.links.open')) {
+        return;
+      }
+      if (isTransitioning) {
+        e.preventDefault();
+        return;
+      }
+      
+      const teY = e.touches[0].clientY;
+      const deltaY = tsY - teY;
+
+      if (Math.abs(deltaY) > 50) {
+        const currentTarget = scrollTargets[currentTargetIndex];
+        if (!currentTarget) return;
+
+        const navHeight = 74;
+        const windowHeight = window.innerHeight;
+        const currentScrollTop = window.scrollY;
+        const targetTop = currentTarget.offsetTop - navHeight;
+        const targetBottom = currentTarget.offsetTop + currentTarget.offsetHeight;
+
+        if (deltaY > 0) {
+          if (currentScrollTop + windowHeight < targetBottom - 25) {
+            return;
+          }
+          e.preventDefault();
+          if (currentTargetIndex < scrollTargets.length - 1) {
+            scrollToSection(currentTargetIndex + 1);
+          }
+        } else {
+          if (currentScrollTop > targetTop + 25) {
+            return;
+          }
+          e.preventDefault();
+          if (currentTargetIndex > 0) {
+            scrollToSection(currentTargetIndex - 1);
+          }
+        }
+      }
+    }, { passive: false });
+
+    document.querySelectorAll('.links a, .brand').forEach(link => {
+      link.addEventListener('click', () => {
+        setTimeout(updateCurrentIndexFromScroll, 600);
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      updateCurrentIndexFromScroll();
+    });
+
+    // Scroll to hash section on load (e.g. #products when returning from article)
+    function handleInitialHash() {
+      if (window.location.hash) {
+        const hashId = window.location.hash.substring(1);
+        const targetSecIndex = scrollTargets.findIndex(t => t.id === hashId);
+        if (targetSecIndex !== -1) {
+          setTimeout(() => {
+            scrollToSection(targetSecIndex);
+          }, 200);
+        }
+      }
+    }
+    handleInitialHash();
+    window.addEventListener('hashchange', handleInitialHash);
   </script>
 </body>
 
