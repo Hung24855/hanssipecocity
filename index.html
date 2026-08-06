@@ -108,16 +108,60 @@
       color: #fff
     }
 
-    .reveal {
+    /* Enhanced Scroll Reveal System */
+    .reveal,
+    .reveal-up {
       opacity: 0;
-      transform: translateY(52px);
-      transition: 1s cubic-bezier(.2, .8, .2, 1)
+      transform: translateY(48px);
+      transition: opacity 1.15s cubic-bezier(0.16, 1, 0.3, 1), transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
     }
 
-    .reveal.show {
-      opacity: 1;
-      transform: none
+    .reveal-down {
+      opacity: 0;
+      transform: translateY(-48px);
+      transition: opacity 1.15s cubic-bezier(0.16, 1, 0.3, 1), transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
     }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-55px);
+      transition: opacity 1.15s cubic-bezier(0.16, 1, 0.3, 1), transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(55px);
+      transition: opacity 1.15s cubic-bezier(0.16, 1, 0.3, 1), transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-zoom {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 1.15s cubic-bezier(0.16, 1, 0.3, 1), transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.show,
+    .reveal-up.show,
+    .reveal-down.show,
+    .reveal-left.show,
+    .reveal-right.show,
+    .reveal-zoom.show {
+      opacity: 1;
+      transform: translate(0, 0) scale(1) !important;
+    }
+
+    /* Stagger Delays for Grid Elements */
+    .delay-1 { transition-delay: 0.12s; }
+    .delay-2 { transition-delay: 0.22s; }
+    .delay-3 { transition-delay: 0.32s; }
+    .delay-4 { transition-delay: 0.42s; }
+    .delay-5 { transition-delay: 0.52s; }
+    .delay-6 { transition-delay: 0.62s; }
 
     .nav {
       position: fixed;
@@ -188,11 +232,12 @@
       min-height: 100vh;
       padding-top: 74px;
       position: relative;
-      display: grid;
-      align-items: center;
+      display: flex;
+      flex-direction: column;
       color: #fff;
       background: #03382c;
       overflow: hidden;
+      box-sizing: border-box;
     }
 
     .slides {
@@ -249,14 +294,22 @@
     .hero-content {
       position: relative;
       z-index: 3;
-      padding: 90px 0;
+      padding: 20px 0;
       max-width: 900px;
-      transform: translate(-82px, 10px)
+      transform: none;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    @media (min-width: 1280px) {
+      .hero-content {
+        transform: translate(-82px, 0);
+      }
     }
 
     .hero-text-bg {
       display: inline-block;
-      padding: 22px 30px;
+      padding: 24px 32px;
       border-radius: 28px;
       background: linear-gradient(90deg, rgba(0, 83, 62, .68), rgba(0, 83, 62, .36), rgba(0, 83, 62, .02));
       backdrop-filter: blur(4px);
@@ -264,21 +317,33 @@
       max-width: 790px
     }
 
+    .hero .eyebrow {
+      font-size: 13.5px;
+      letter-spacing: 1.2px;
+      line-height: 1.45;
+      margin-bottom: 15px;
+      color: var(--gold);
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
     .hero h1 {
-      font-size: clamp(48px, 6.2vw, 78px);
-      line-height: 1;
+      font-size: clamp(36px, 4.5vw, 60px);
+      line-height: 1.08;
       color: var(--gold);
       font-weight: 950;
       text-shadow: 0 8px 24px rgba(0, 0, 0, .55), 0 0 2px rgba(0, 0, 0, .8);
       animation: fadeUp 1s both;
       white-space: nowrap;
-      letter-spacing: -2px
+      letter-spacing: -1.5px;
+      margin-bottom: 35px;
     }
 
     .hero p {
-      font-size: 19px;
-      max-width: 700px;
-      margin: 18px 0;
+      font-size: 16.5px;
+      max-width: 680px;
+      margin: 12px 0 50px;
+      line-height: 1.55;
       text-shadow: 0 4px 18px rgba(0, 0, 0, .55);
       animation: fadeUp 1s .15s both
     }
@@ -310,7 +375,7 @@
     }
 
     .next {
-      right: 22px
+      right: 45px
     }
 
     @keyframes fadeUp {
@@ -326,8 +391,9 @@
     }
 
     .stats-strip {
-      position: absolute;
-      bottom: 28px;
+      position: relative;
+      margin-top: 0;
+      margin-bottom: 28px;
       left: 0;
       right: 0;
       z-index: 5;
@@ -406,7 +472,51 @@
       font-size: 14.5px;
       color: rgba(255, 255, 255, 0.82);
       line-height: 1.55;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
+    }
+
+    .hero-card-feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 14px 0 22px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .feature-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(243, 198, 76, 0.25), rgba(0, 92, 69, 0.4));
+      border: 1px solid rgba(243, 198, 76, 0.4);
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .hero-feature-item strong {
+      display: block;
+      font-size: 13.5px;
+      color: var(--gold);
+      font-weight: 850;
+      line-height: 1.3;
+    }
+
+    .hero-feature-item span {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.35;
     }
 
     .hero-card-highlights {
@@ -553,79 +663,35 @@
       backdrop-filter: blur(4px)
     }
 
-    /* ===== RIGHT SIDE PHOTO OVERLAP ===== */
+    /* ===== RIGHT SIDE DUAL PHOTOS (BIG FULL-WIDTH STACKED) ===== */
     .loc-right {
-      position: relative;
-      /* Container dùng để chứa 2 ảnh đè nhau */
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .loc-photo-big {
-      position: relative;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0, 60, 45, .18);
-      cursor: pointer;
-      z-index: 1;
-      transition: z-index 0.3s, transform .35s;
-    }
-
-    .loc-photo-big:hover {
-      z-index: 12;
-    }
-
-    .loc-photo-big img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform .5s;
-    }
-
-    .loc-photo-big:hover img {
-      transform: scale(1.04);
-    }
-
+    .loc-photo-big,
     .loc-photo-small {
-      position: absolute;
-      bottom: -28px;
-      right: -18px;
-      width: 55%;
-      border-radius: 18px;
+      position: relative;
+      border-radius: 22px;
       overflow: hidden;
-      box-shadow: 0 14px 36px rgba(0,0,0,.28);
-      border: 4px solid #fff;
+      box-shadow: 0 16px 45px rgba(0, 60, 45, .16);
       cursor: pointer;
-      z-index: 10;
-      transition: transform .35s, z-index 0.3s;
+      width: 100%;
+      background: #03382c;
+      transition: transform .35s ease, box-shadow .35s ease;
     }
 
+    .loc-photo-big:hover,
     .loc-photo-small:hover {
-      transform: scale(1.04) translateY(-4px);
-      z-index: 12;
+      box-shadow: 0 24px 55px rgba(0, 60, 45, .24);
     }
 
+    .loc-photo-big img,
     .loc-photo-small img {
       width: 100%;
       height: auto;
       display: block;
-    }
-
-    .loc-photo-tall {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(0, 60, 45, .14);
-      cursor: pointer;
-    }
-
-    .loc-photo-tall img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform .5s;
-    }
-
-    .loc-photo-tall:hover img {
-      transform: scale(1.04);
     }
 
     .loc-photo-caption {
@@ -633,33 +699,36 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 20px 18px 16px;
-      background: linear-gradient(to top, rgba(0,35,25,.82) 0%, transparent 100%);
+      padding: 24px 22px 18px;
+      background: linear-gradient(to top, rgba(0, 35, 25, 0.88) 0%, transparent 100%);
       color: #fff;
+      z-index: 5;
     }
 
     .loc-photo-caption .caption-tag {
       display: inline-block;
-      font-size: 10px;
+      font-size: 10.5px;
       font-weight: 900;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       background: var(--gold);
       color: var(--dark);
-      padding: 3px 10px;
+      padding: 4px 12px;
       border-radius: 99px;
       margin-bottom: 6px;
     }
 
     .loc-photo-caption .caption-title {
-      font-size: 16px;
-      font-weight: 800;
-      text-shadow: 0 2px 8px rgba(0,0,0,.5);
+      font-size: 17px;
+      font-weight: 850;
+      color: #ffffff;
+      line-height: 1.2;
+      text-shadow: 0 2px 8px rgba(0,0,0,.6);
     }
 
     .loc-photo-caption .caption-sub {
-      font-size: 12px;
-      color: rgba(255,255,255,.78);
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.85);
       margin-top: 3px;
       line-height: 1.4;
     }
@@ -707,11 +776,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform .55s cubic-bezier(.2, .8, .2, 1);
-    }
-
-    .loc-tile:hover img {
-      transform: scale(1.1);
     }
 
     /* Subtle dark gradient at bottom only for text legibility */
@@ -856,11 +920,6 @@
       width: 100%;
       object-fit: cover;
       border-radius: 16px;
-      transition: transform .55s;
-    }
-
-    .image-card:hover img {
-      transform: scale(1.04);
     }
 
     .products {
@@ -873,7 +932,7 @@
       gap: 24px;
       margin-top: 30px;
     }
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
       .prod-grid {
         grid-template-columns: 1fr;
       }
@@ -938,7 +997,7 @@
       gap: 20px;
       margin-top: 32px;
     }
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
       .own-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1045,8 +1104,24 @@
       box-shadow: var(--shadow)
     }
 
-    .legal li {
-      margin: 12px 0
+    .legal-box p {
+      font-size: 16.5px;
+      line-height: 1.6;
+      color: #0c3327;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .legal-box ul {
+      margin-left: 24px;
+      padding-left: 8px;
+    }
+
+    .legal-box li {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #234238;
+      margin: 12px 0;
     }
 
     .footer-cta {
@@ -1069,8 +1144,103 @@
     .contact-info {
       background: #fff;
       border-radius: 26px;
-      padding: 30px;
-      box-shadow: var(--shadow)
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .contact-info-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--green);
+      margin-bottom: 16px;
+    }
+
+    .contact-items {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 550px) {
+      .contact-items {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: #f6faf8;
+      border-radius: 14px;
+      border: 1px solid #e1eee8;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s ease;
+    }
+
+    .contact-item:hover {
+      background: #eef8f3;
+      border-color: var(--green);
+      transform: translateY(-2px);
+    }
+
+    .contact-item.highlight {
+      background: linear-gradient(135deg, #005c45, #03382c);
+      color: #fff;
+      border-color: var(--gold);
+    }
+
+    .contact-item.highlight .contact-label {
+      color: var(--gold);
+    }
+
+    .contact-item.highlight .contact-value {
+      color: #fff;
+    }
+
+    .contact-icon {
+      font-size: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: rgba(0, 92, 69, 0.1);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .contact-item.highlight .contact-icon {
+      background: rgba(243, 198, 76, 0.2);
+    }
+
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .contact-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #006143;
+    }
+
+    .contact-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: #11362b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     input,
@@ -1090,57 +1260,61 @@
     }
 
     .map {
-      height: 280px;
-      border-radius: 20px;
-      overflow: hidden
+      flex: 1;
+      min-height: 220px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid #e1eee8;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
     }
 
     .map iframe {
       width: 100%;
       height: 100%;
-      border: 0
+      border: 0;
+      display: block;
     }
 
     .minigame {
       position: fixed;
-      right: 22px;
-      bottom: 22px;
+      right: 18px;
+      bottom: 18px;
       z-index: 999999
     }
 
     .game-btn {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
       border: 0;
       border-radius: 999px;
       background: linear-gradient(135deg, #efffe8, #fff7c4);
       box-shadow: var(--shadow);
       font-weight: 950;
       color: var(--green);
-      padding: 12px 18px 12px 12px;
+      padding: 10px 15px 10px 10px;
       animation: pulse 1.7s infinite;
       cursor: pointer;
-      min-width: 215px
+      min-width: 180px;
     }
 
     .leaf-icon {
-      width: 54px;
-      height: 54px;
+      width: 46px;
+      height: 46px;
       background: linear-gradient(135deg, #65c54a, #007c47);
       border-radius: 0 70% 45% 70%;
       transform: rotate(-45deg);
       position: relative;
       display: grid;
       place-items: center;
-      box-shadow: 0 12px 24px rgba(0, 92, 69, .26)
+      box-shadow: 0 10px 20px rgba(0, 92, 69, .26)
     }
 
     .leaf-icon:before {
       content: "";
       position: absolute;
-      width: 3px;
-      height: 38px;
+      width: 2.5px;
+      height: 32px;
       background: rgba(255, 255, 255, .72);
       border-radius: 9px;
       transform: rotate(45deg)
@@ -1149,20 +1323,20 @@
     .leaf-icon span {
       transform: rotate(45deg);
       color: #fff;
-      font-size: 22px;
+      font-size: 18.5px;
       position: relative;
       z-index: 2
     }
 
     .game-btn-text {
-      font-size: 14px;
+      font-size: 12.5px;
       line-height: 1.25;
       text-align: left
     }
 
     .game-btn-text b {
       display: block;
-      font-size: 16px;
+      font-size: 14px;
       color: #006143
     }
 
@@ -1406,7 +1580,7 @@
 
     .scroll-indicators {
       position: fixed;
-      right: 20px;
+      right: 8px;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
@@ -1550,7 +1724,7 @@
       margin: 3px 0 10px
     }
 
-    @media(max-width:900px) {
+    @media(max-width: 1024px) {
       .scroll-indicators {
         display: none !important;
       }
@@ -1558,6 +1732,18 @@
       .minigame {
         right: 12px;
         bottom: 14px;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(20px);
+        transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+      }
+
+      .minigame.show-mobile {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
       }
 
       .game-btn {
@@ -1604,46 +1790,72 @@
         grid-template-columns: 1fr;
       }
 
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+      }
+
       .hero-content {
         transform: none;
-        padding: 30px 0 60px;
+        padding: 75px 0 0;
         max-width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
       }
 
       .hero-text-bg {
-        padding: 18px 16px;
+        padding: 26px 20px 24px;
         max-width: 100%;
-        border-radius: 20px;
+        border-radius: 24px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
 
       .hero .eyebrow {
-        font-size: 12.5px;
-        letter-spacing: 1px;
-        line-height: 1.35;
-        margin-bottom: 6px;
+        font-size: 13px;
+        letter-spacing: 0.8px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        font-weight: 800;
       }
 
       .hero h1 {
         white-space: normal;
-        font-size: clamp(28px, 8vw, 42px);
-        letter-spacing: -1px;
-        line-height: 1.1;
-        margin-bottom: 8px;
+        font-size: clamp(28px, 7.5vw, 36px);
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        margin-bottom: 12px;
       }
 
       .hero p {
-        font-size: 14px;
-        margin: 10px 0 16px;
-        line-height: 1.45;
+        font-size: 16px;
+        margin: 10px 0 20px;
+        line-height: 1.8;
       }
 
       .hero-actions {
+        margin-top: auto;
+        padding-top: 24px;
         gap: 10px;
+        display: flex;
+        width: 100%;
       }
 
       .hero-actions .btn {
-        padding: 10px 18px;
+        flex: 1;
+        padding: 11px 14px;
         font-size: 13.5px;
+        font-weight: 800;
+        text-align: center;
+        justify-content: center;
       }
 
       .arrow {
@@ -1652,15 +1864,16 @@
         font-size: 22px;
         opacity: 0.95;
         z-index: 10 !important;
-        top: 38%;
+        top: 62%;
+        transform: translateY(-50%);
       }
 
       .prev {
-        left: 6px;
+        left: 3px;
       }
 
       .next {
-        right: 6px;
+        right: 3px;
       }
 
       /* MOBILE SIDEBAR MENU */
@@ -1790,6 +2003,16 @@
         overflow: hidden;
       }
 
+      .loc-photo-small {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        width: 100%;
+        margin-top: 14px;
+        border-width: 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+      }
+
       .loc-right {
         margin-top: 10px;
       }
@@ -1805,19 +2028,61 @@
         box-shadow: 0 10px 25px rgba(0,0,0,0.18);
       }
 
-      .stats,
       .plan-grid,
       .prod-grid,
       .own-grid,
       .util-grid,
       .contact-grid,
       .adv-grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        width: 100%;
+      }
+
+      .stat {
+        padding: 10px 6px;
+        font-size: 11.5px;
+        line-height: 1.3;
+        text-align: center;
+        border-right: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .stat:nth-child(1),
+      .stat:nth-child(2),
+      .stat:nth-child(3) {
+        grid-column: span 2;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      .stat:nth-child(4),
+      .stat:nth-child(5) {
+        grid-column: span 3;
+      }
+
+      .stat:nth-child(3),
+      .stat:nth-child(5) {
+        border-right: none;
+      }
+
+      .stat strong {
+        display: block;
+        color: var(--gold);
+        font-size: 19px;
+        line-height: 1.15;
+        margin-bottom: 3px;
+        font-weight: 850;
       }
 
       .loc-cards,
       .map-duo {
-        grid-template-columns: 1fr 1fr
+        grid-template-columns: 1fr 1fr;
       }
 
       .stats-strip {
@@ -1825,17 +2090,15 @@
         bottom: auto;
         left: auto;
         right: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin: 12px auto;
+        padding: 0;
+        width: min(1180px, 92%);
+        z-index: 5;
       }
 
       .section {
         min-height: auto;
         padding: 50px 0;
-      }
-
-      .hero {
-        min-height: 86vh
       }
 
       .overview-showcase {
@@ -1860,6 +2123,20 @@
       }
     }
 
+    @media (max-width: 400px) {
+      .stat {
+        padding: 8px 4px;
+        font-size: 10.5px;
+      }
+      .stat strong {
+        font-size: 17px;
+      }
+      .hero-actions .btn {
+        padding: 10px 8px;
+        font-size: 16px;
+      }
+    }
+
       .image-card img {
         height: 300px
       }
@@ -1879,7 +2156,7 @@
   <header class="hero" id="top">
     <div class="slides">
       <div class="slide active" style="background-image:url('assets/images/cover1.jpg')"></div>
-      <div class="slide" style="background-image:url('assets/images/cover2.jpg')"></div>
+      <div class="slide" style="background-image:url('assets/images/19.avif')"></div>
       <div class="slide" style="background-image:url('assets/images/cover3.jpg')"></div>
     </div>
     <div class="shine"></div><button class="arrow prev" id="prev">‹</button><button class="arrow next"
@@ -1903,17 +2180,42 @@
         <div class="stat"><strong>+<span data-count="22000">0</span></strong>Cư dân</div>
       </div>
     </div>
+    
   </header>
   <section class="section overview" id="overview">
     <div class="container">
-      <div class="eyebrow reveal">Tổng quan dự án</div>
-      <h2 class="title reveal">HANSSIP ECOCITY</h2>
-      <div class="overview-showcase reveal">
+      <div class="eyebrow reveal-down">Tổng quan dự án</div>
+      <h2 class="title reveal-up">HANSSIP ECOCITY</h2>
+      <div class="overview-showcase">
         <!-- Left Hero Architectural Card -->
-        <div class="overview-hero-card">
+        <div class="overview-hero-card reveal-left">
           <div>
             <h3 class="hero-card-title">Khu Đô Thị Dịch Vụ Thương Mại HANSSIP ECOCITY</h3>
             <p class="hero-card-desc">Quần thể không gian sống xanh - kinh doanh thịnh vượng - an cư bền vững hàng đầu phía Nam Hà Nội.</p>
+            
+            <div class="hero-card-feature-list">
+              <div class="hero-feature-item">
+                <div class="feature-icon">📍</div>
+                <div>
+                  <strong>Cửa Ngõ Phía Nam Thủ Đô</strong>
+                  <span>Đón đầu trục giao thương liên vùng & siêu hạ tầng tương lai</span>
+                </div>
+              </div>
+              <div class="hero-feature-item">
+                <div class="feature-icon">🌿</div>
+                <div>
+                  <strong>Chuẩn Sống Xanh ESG++</strong>
+                  <span>Không gian sinh thái hài hòa giữa tự nhiên và đô thị dịch vụ</span>
+                </div>
+              </div>
+              <div class="hero-feature-item">
+                <div class="feature-icon">🏢</div>
+                <div>
+                  <strong>Đô Thị Dịch Vụ</strong>
+                  <span>Phát triển đa năng: Shophouse thương mại, Nhà phố liền kề & Đô thị dịch vụ</span>
+                </div>
+              </div>
+            </div>
           </div>
           
           <div class="hero-card-highlights">
@@ -1933,7 +2235,7 @@
         </div>
 
         <!-- Right Editorial Specs Dossier -->
-        <div class="overview-dossier">
+        <div class="overview-dossier reveal-right">
           <div class="dossier-row">
             <span class="dossier-label">Tên chính thức</span>
             <span class="dossier-val highlight">Khu đô thị HANSSIP ECOCITY</span>
@@ -1969,13 +2271,13 @@
   </section>
   <section class="section location" id="location">
     <div class="container">
-      <div class="eyebrow reveal">Vị trí chiến lược</div>
+      <div class="eyebrow reveal-down">Vị trí chiến lược</div>
       <div class="loc-grid">
         <div>
-          <p class="lead reveal">Nằm trong tọa độ vàng của cực phát triển phía Nam Thủ đô, <strong style="color: var(--green); font-weight: 850;">HANSSIP ECOCITY</strong> kết nối trực tiếp với hành lang siêu hạ tầng tương lai bao gồm Khu đô thị thể thao Quốc tế Hà Nội và đô thị công nghệ 6000ha, đồng thời đón đầu tiềm năng giao thương khổng lồ từ Sân bay thứ 2 dự kiến của Vùng Thủ đô, tuyến QL1A mở rộng 90m và đường gom cao tốc Pháp Vân - Cầu Giẽ.</p>
-          <div class="loc-gallery reveal">
+          <p class="lead reveal-up">Nằm trong tọa độ vàng của cực phát triển phía Nam Thủ đô, <strong style="color: var(--green); font-weight: 850;">HANSSIP ECOCITY</strong> kết nối trực tiếp với hành lang siêu hạ tầng tương lai bao gồm Khu đô thị thể thao Quốc tế Hà Nội và đô thị công nghệ 6000ha, đồng thời đón đầu tiềm năng giao thương khổng lồ từ Sân bay thứ 2 dự kiến của Vùng Thủ đô, tuyến QL1A mở rộng 90m và đường gom cao tốc Pháp Vân - Cầu Giẽ.</p>
+          <div class="loc-gallery">
 
-            <div class="loc-tile" data-img="assets/images/002.webp">
+            <div class="loc-tile reveal-left delay-1" data-img="assets/images/002.webp">
               <img src="assets/images/002.webp" alt="Phía Đông">
               <div class="loc-tile-overlay">
                 <span class="loc-tile-name">→ Phía Đông</span>
@@ -1984,7 +2286,7 @@
               <div class="loc-tile-dir">Đ</div>
             </div>
 
-            <div class="loc-tile" data-img="assets/images/003.webp">
+            <div class="loc-tile reveal-left delay-2" data-img="assets/images/003.webp">
               <img src="assets/images/003.webp" alt="Phía Tây">
               <div class="loc-tile-overlay">
                 <span class="loc-tile-name">← Phía Tây</span>
@@ -1993,7 +2295,7 @@
               <div class="loc-tile-dir">T</div>
             </div>
 
-            <div class="loc-tile" data-img="assets/images/004.jfif">
+            <div class="loc-tile reveal-left delay-3" data-img="assets/images/004.jfif">
               <img src="assets/images/004.jfif" alt="Phía Nam">
               <div class="loc-tile-overlay">
                 <span class="loc-tile-name">↓ Phía Nam</span>
@@ -2002,7 +2304,7 @@
               <div class="loc-tile-dir">N</div>
             </div>
 
-            <div class="loc-tile" data-img="assets/images/005.jpg">
+            <div class="loc-tile reveal-left delay-4" data-img="assets/images/005.jpg">
               <img src="assets/images/005.jpg" alt="Phía Bắc">
               <div class="loc-tile-overlay">
                 <span class="loc-tile-name">↑ Phía Bắc</span>
@@ -2013,7 +2315,7 @@
 
           </div>
         </div>
-        <div class="loc-right reveal">
+        <div class="loc-right reveal-right">
 
           <!-- Ảnh to -->
           <div class="loc-photo-big" data-img="assets/images/31vitri.jpg">
@@ -2026,7 +2328,7 @@
           </div>
 
           <!-- Ảnh nhỏ đè góc dưới phải -->
-          <div class="loc-photo-small" data-img="assets/images/32vitri.jpg">
+          <div class="loc-photo-small reveal-zoom delay-2" data-img="assets/images/32vitri.jpg">
             <img src="assets/images/32vitri.jpg" alt="Sơ đồ vị trí 2">
           </div>
 
@@ -2036,30 +2338,30 @@
   </section>
   <section class="section advantages">
     <div class="container">
-      <div class="eyebrow reveal">6 giá trị tạo nên sức hút</div>
-      <h2 class="title reveal">Của HANSSIP ECOCITY</h2>
+      <div class="eyebrow reveal-down">6 giá trị tạo nên sức hút</div>
+      <h2 class="title reveal-up">Của HANSSIP ECOCITY</h2>
       <div class="adv-grid">
-        <div class="adv reveal"><b>01</b>
+        <div class="adv reveal-left delay-1"><b>01</b>
           <h3>Tâm điểm kết nối</h3>
           <p>Đón nhịp quy hoạch Thủ đô <br>Tọa lạc tại cửa ngõ phía Nam Hà Nội, đô thị hưởng lợi từ định hướng Quy hoạch Thủ đô tầm nhìn 100 năm, hệ thống giao thông chiến lược và sự phát triển của KCN hỗ trợ Nam Hà Nội, kiến tạo dư địa tăng trưởng dài hạn.</p>
         </div>
-        <div class="adv reveal"><b>02</b>
+        <div class="adv reveal-up delay-2"><b>02</b>
           <h3>Tiện ích all-in-one</h3>
           <p>Tích hợp đầy đủ không gian sống – làm việc – mua sắm – giáo dục – giải trí trong một hệ sinh thái tiện ích đồng bộ, đáp ứng trọn vẹn mọi nhu cầu của cư dân hiện đại.</p>
         </div>
-        <div class="adv reveal"><b>03</b>
+        <div class="adv reveal-right delay-3"><b>03</b>
           <h3>Pháp lý minh bạch</h3>
           <p>Minh bạch trong pháp lý, rõ ràng trong quyền sở hữu, giúp khách hàng an tâm an cư và đầu tư bền vững.</p>
         </div>
-        <div class="adv reveal"><b>04</b>
+        <div class="adv reveal-left delay-1"><b>04</b>
           <h3>Cộng đồng tri thức</h3>
           <p>Nơi hội tụ các chuyên gia, kỹ sư, doanh nhân và lực lượng lao động chất lượng cao, kiến tạo cộng đồng văn minh, năng động và giàu tiềm năng phát triển</p>
         </div>
-        <div class="adv reveal"><b>05</b>
+        <div class="adv reveal-up delay-2"><b>05</b>
           <h3>Tiềm năng gia tăng giá trị</h3>
           <p>Hưởng lợi từ hạ tầng giao thông ngày càng hoàn thiện, sự phát triển của KCN hỗ trợ Nam Hà Nội và nhu cầu an cư – thương mại gia tăng, mở ra tiềm năng tăng trưởng bền vững trong tương lai.</p>
         </div>
-        <div class="adv reveal"><b>06</b>
+        <div class="adv reveal-right delay-3"><b>06</b>
           <h3>Không gian sống xanh</h3>
           <p>Được quy hoạch hài hòa giữa thiên nhiên và đô thị, mang đến môi trường sống xanh, tiện nghi và bền vững, nâng tầm chất lượng cuộc sống cho mọi thế hệ.</p>
         </div>
@@ -2068,21 +2370,21 @@
   </section>
   <section class="section">
     <div class="container">
-      <div class="eyebrow reveal">Mặt bằng tổng thể</div>
-      <h2 class="title reveal">KHU ĐÔ THỊ HANSSIP ECOCITY</h2>
+      <div class="eyebrow reveal-down">Mặt bằng tổng thể</div>
+      <h2 class="title reveal-up">KHU ĐÔ THỊ HANSSIP ECOCITY</h2>
       <div class="plan-grid">
-        <div class="image-card reveal" data-img="assets/images/006.jpg"><img src="assets/images/006.jpg">
+        <div class="image-card reveal-left delay-1" data-img="assets/images/006.jpg"><img src="assets/images/006.jpg">
         </div>
-        <div class="image-card reveal" data-img="assets/images/007.png"><img src="assets/images/007.png"></div>
+        <div class="image-card reveal-right delay-2" data-img="assets/images/007.avif"><img src="assets/images/007.avif"></div>
       </div>
     </div>
   </section>
   <section class="section products" id="products">
     <div class="container">
-      <div class="eyebrow reveal">SẢN PHẨM TẠI</div>
-      <h2 class="title reveal">KHU ĐÔ THỊ HANSSIP ECOCITY</h2>
+      <div class="eyebrow reveal-down">SẢN PHẨM TẠI</div>
+      <h2 class="title reveal-up">KHU ĐÔ THỊ HANSSIP ECOCITY</h2>
       <div class="prod-grid">
-        <a class="prod reveal" href="nha-pho-thuong-mai.html" style="text-decoration: none; color: inherit;">
+        <a class="prod reveal-left delay-1" href="nha-pho-thuong-mai.html" style="text-decoration: none; color: inherit;">
           <img src="assets/images/product1.jpg" alt="HANSSIP ECOCITY: NHÀ PHỐ THƯƠNG MẠI">
           <div class="prod-body">
             <h3>HANSSIP ECOCITY: NHÀ PHỐ THƯƠNG MẠI</h3>
@@ -2090,7 +2392,7 @@
             <span class="prod-more">Xem chi tiết →</span>
           </div>
         </a>
-        <a class="prod reveal" href="hanssip-gateway-khu-a.html" style="text-decoration: none; color: inherit;">
+        <a class="prod reveal-zoom delay-2" href="hanssip-gateway-khu-a.html" style="text-decoration: none; color: inherit;">
           <img src="assets/images/008.jpg" alt="HANSSIP GATEWAY (KHU A)">
           <div class="prod-body">
             <h3>HANSSIP GATEWAY (KHU A)</h3>
@@ -2098,7 +2400,7 @@
             <span class="prod-more">Xem chi tiết →</span>
           </div>
         </a>
-        <a class="prod reveal" href="hanssip-gateway-khu-b.html" style="text-decoration: none; color: inherit;">
+        <a class="prod reveal-right delay-3" href="hanssip-gateway-khu-b.html" style="text-decoration: none; color: inherit;">
           <img src="assets/images/013.jfif" alt="HANSSIP GATEWAY (KHU B)">
           <div class="prod-body">
             <h3>HANSSIP GATEWAY (KHU B)</h3>
@@ -2111,9 +2413,9 @@
   </section>
   <section class="section ownership">
     <div class="container">
-      <div class="eyebrow reveal">Ưu đãi đặc biệt</div>
-      <h2 class="title reveal" style="color:#fff">Chính sách thanh toán linh hoạt</h2>
-      <div class="own-grid reveal">
+      <div class="eyebrow reveal-down">Ưu đãi đặc biệt</div>
+      <h2 class="title reveal-up" style="color:#fff">Chính sách thanh toán linh hoạt</h2>
+      <div class="own-grid reveal-zoom">
         <div class="own">
           <span class="own-label">CHIẾT KHẤU</span>
           <div class="own-num">9%</div>
@@ -2138,26 +2440,26 @@
   </section>
   <section class="section utilities" id="utilities">
     <div class="container">
-      <div class="eyebrow reveal">40+ tiện ích đồng bộ</div>
-      <h2 class="title reveal">Tiện ích đồng bộ cho cuộc sống hiện đại</h2>
-      <p class="lead reveal" style="margin-bottom: 32px;">Hơn 40 tiện ích được đầu tư đồng bộ, kiến tạo chuẩn sống hiện đại, nơi mọi nhu cầu từ an cư, làm việc đến kinh doanh và giải trí đều được đáp ứng trong tầm tay.</p>
+      <div class="eyebrow reveal-down">40+ tiện ích đồng bộ</div>
+      <h2 class="title reveal-up">Tiện ích đồng bộ cho cuộc sống hiện đại</h2>
+      <p class="lead reveal-up" style="margin-bottom: 32px;">Hơn 40 tiện ích được đầu tư đồng bộ, kiến tạo chuẩn sống hiện đại, nơi mọi nhu cầu từ an cư, làm việc đến kinh doanh và giải trí đều được đáp ứng trong tầm tay.</p>
       <div class="util-grid">
-        <div class="util reveal" data-img="assets/images/010.png"><img src="assets/images/010.png" alt="Trung tâm thương mại">
+        <div class="util reveal-zoom delay-1" data-img="assets/images/010.avif"><img src="assets/images/010.avif" alt="Trung tâm thương mại">
           <p>Trung tâm thương mại</p>
         </div>
-        <div class="util reveal" data-img="assets/images/011.jpg"><img src="assets/images/011.jpg" alt="Trường học">
+        <div class="util reveal-zoom delay-2" data-img="assets/images/011.jpg"><img src="assets/images/011.jpg" alt="Trường học">
           <p>Trường học</p>
         </div>
-        <div class="util reveal" data-img="assets/images/012.jpg"><img src="assets/images/012.jpg" alt="Công viên cây xanh">
+        <div class="util reveal-zoom delay-3" data-img="assets/images/19.avif"><img src="assets/images/19.avif" alt="Công viên cây xanh">
           <p>Công viên cây xanh</p>
         </div>
-        <div class="util reveal" data-img="assets/images/013.jfif"><img src="assets/images/013.jfif" alt="Không gian thể thao">
+        <div class="util reveal-zoom delay-4" data-img="assets/images/013.jfif"><img src="assets/images/013.jfif" alt="Không gian thể thao">
           <p>Không gian thể thao</p>
         </div>
-        <div class="util reveal" data-img="assets/images/014.jpg"><img src="assets/images/014.jpg" alt="Trung tâm chăm sóc sức khỏe">
+        <div class="util reveal-zoom delay-5" data-img="assets/images/014.jpg"><img src="assets/images/014.jpg" alt="Trung tâm chăm sóc sức khỏe">
           <p>Trung tâm chăm sóc sức khỏe</p>
         </div>
-        <div class="util reveal" data-img="assets/images/015.png"><img src="assets/images/015.png" alt="Nhà ở chuyên gia">
+        <div class="util reveal-zoom delay-6" data-img="assets/images/015.avif"><img src="assets/images/015.avif" alt="Nhà ở chuyên gia">
           <p>Phố ẩm thực</p>
         </div>
       </div>
@@ -2165,9 +2467,9 @@
   </section>
   <section class="section legal" id="legal">
     <div class="container">
-      <div class="eyebrow reveal">Pháp lý minh bạch</div>
-      <h2 class="title reveal">An tâm đầu tư - Vững chắc sở hữu</h2>
-      <div class="legal-box reveal">
+      <div class="eyebrow reveal-down">Pháp lý minh bạch</div>
+      <h2 class="title reveal-up">An tâm đầu tư - Vững chắc sở hữu</h2>
+      <div class="legal-box reveal-up">
         <p>HANSSIP ECOCITY được phát triển theo định hướng đô thị dịch vụ thương mại đồng bộ, minh bạch thông tin và
           thuận tiện cho hoạt động đầu tư.</p>
         <ul>
@@ -2181,18 +2483,18 @@
   </section>
   <section class="section footer-cta">
     <div class="container">
-      <div class="eyebrow reveal">HANSSIP ECOCITY</div>
-      <h2 class="title reveal" style="color:#fff">Liên hệ ngay để nhận tư vấn chi tiết</h2>
-      <p class="lead reveal" style="margin:auto">Khám phá cơ hội an cư, kinh doanh và đầu tư tại khu đô thị dịch vụ
-        thương mại liền kề KCN HANSSIP.</p><br><a href="tel:+84368223331" class="btn">Liên hệ tư vấn</a>
+      <div class="eyebrow reveal-down">HANSSIP ECOCITY</div>
+      <h2 class="title reveal-up" style="color:#fff">Liên hệ ngay để nhận tư vấn chi tiết</h2>
+      <p class="lead reveal-up" style="margin:auto">Khám phá cơ hội an cư, kinh doanh và đầu tư tại khu đô thị dịch vụ
+        thương mại liền kề KCN HANSSIP.</p><br><a href="tel:+84368223331" class="btn reveal-zoom delay-2">Liên hệ tư vấn</a>
     </div>
   </section>
   <section class="section contact" id="contact">
     <div class="container">
-      <div class="eyebrow reveal">Liên hệ tư vấn đầu tư</div>
-      <h2 class="title reveal">Gửi thông tin cho chúng tôi</h2>
+      <div class="eyebrow reveal-down">Liên hệ tư vấn đầu tư</div>
+      <h2 class="title reveal-up">Gửi thông tin cho chúng tôi</h2>
       <div class="contact-grid">
-        <form class="form reveal" id="contactForm" autocomplete="on">
+        <form class="form reveal-left" id="contactForm" autocomplete="on">
           <input id="cName" name="name" autocomplete="name" type="text" placeholder="Họ và tên *" required>
           <input id="cPhone" name="phone" autocomplete="tel" type="tel" placeholder="Số điện thoại *" required>
           <input id="cEmail" name="email" autocomplete="email" type="email" placeholder="Email">
@@ -2211,13 +2513,39 @@
           </button>
           <p id="formMsg" style="margin-top: 10px; font-weight: 700; text-align: center;"></p>
         </form>
-        <div class="contact-info reveal">
-          <h3>Thông tin liên hệ</h3>
-          <p><b>Website:</b> www.hanssip.net</p>
-          <p><b>Email:</b> sales@nggroup.vn</p>
-          <p><b>Hotline:</b> <a href="tel:+84368223331" style="color:inherit; text-decoration:none;">+84 36 822 3331</a></p>
-          <p><b>GPS:</b> 13.0492456, 109.3390757</p>
-          <div class="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4315.178591319602!2d105.9146421!3d20.708342399999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135c9bc865257df%3A0x19af10cd10680502!2zSEFOU1NJUCBJbmR1c3RyaWFsIFBhcmsgLSBLaHUgY8O0bmcgbmdoaeG7h3AgaOG7lyB0cuG7oyB2w6AgxJHDtCB0aOG7iyBk4buLY2ggduG7pSBOYW0gSMOgIE7hu5lp!5e1!3m2!1svi!2s!4v1785773090612!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+        <div class="contact-info reveal-right">
+          <h3 class="contact-info-title">Thông tin liên hệ</h3>
+          <div class="contact-items">
+            <a href="https://www.hanssip.net" target="_blank" rel="noopener" class="contact-item">
+              <div class="contact-icon">🌐</div>
+              <div class="contact-detail">
+                <span class="contact-label">Website</span>
+                <span class="contact-value">www.hanssip.net</span>
+              </div>
+            </a>
+            <a href="mailto:sales@nggroup.vn" class="contact-item">
+              <div class="contact-icon">✉️</div>
+              <div class="contact-detail">
+                <span class="contact-label">Email</span>
+                <span class="contact-value">sales@nggroup.vn</span>
+              </div>
+            </a>
+            <a href="tel:+84368223331" class="contact-item highlight">
+              <div class="contact-icon">📞</div>
+              <div class="contact-detail">
+                <span class="contact-label">Hotline tư vấn</span>
+                <span class="contact-value">+84 36 822 3331</span>
+              </div>
+            </a>
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div class="contact-detail">
+                <span class="contact-label">Tọa độ GPS</span>
+                <span class="contact-value">13.0492, 109.3390</span>
+              </div>
+            </div>
+          </div>
+          <div class="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4315.178591319602!2d105.9146421!3d20.708342399999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135c9bc865257df%3A0x19af10cd10680502!2zSEFOU1NJUCBJbmR1c3RyaWFsIFBhcmsgLSBLaHUgY8O0bmcgbmdoaeG7h3AgaOG7lyB0cuG7oyB2w6AgxJHDtCB0aOG7iyBk4buLY2ggduG7pSBOYW0gSMOgIE7hu5lp!5e1!3m2!1svi!2s!4v1785773090612!5m2!1svi!2s" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
         </div>
       </div>
     </div>
@@ -2337,8 +2665,8 @@
           e.target.classList.remove('show');
         }
       }
-    }), { threshold: .16 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }), { threshold: 0.15, rootMargin: '0px 0px -90px 0px' });
+    document.querySelectorAll('.reveal, .reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-zoom').forEach(el => io.observe(el));
 
     let counted = false;
     const statsStrip = document.querySelector('.stats-strip');
@@ -2372,6 +2700,25 @@
       };
     }
 
+    const minigameEl = document.querySelector('.minigame');
+    const heroEl = document.getElementById('top');
+    const gamePanelEl = document.getElementById('gamePanel');
+
+    function checkMinigameVisibility() {
+      if (!minigameEl) return;
+      if (window.innerWidth <= 1024) {
+        const heroHeight = heroEl ? heroEl.offsetHeight : window.innerHeight;
+        const isGameOpen = gamePanelEl && gamePanelEl.style.display === 'block';
+        if (window.scrollY > heroHeight - 150 || isGameOpen) {
+          minigameEl.classList.add('show-mobile');
+        } else {
+          minigameEl.classList.remove('show-mobile');
+        }
+      } else {
+        minigameEl.classList.remove('show-mobile');
+      }
+    }
+
     addEventListener('scroll', () => { 
       progress.style.width = (scrollY / (document.body.scrollHeight - innerHeight) * 100) + '%'; 
       if (toTop) {
@@ -2381,7 +2728,10 @@
           toTop.classList.remove('show');
         }
       }
+      checkMinigameVisibility();
     });
+    addEventListener('resize', checkMinigameVisibility);
+    checkMinigameVisibility();
     const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'); document.querySelectorAll('[data-img]').forEach(el => { el.addEventListener('dblclick', () => { lbImg.src = el.dataset.img; lb.classList.add('open') }) }); closeLb.onclick = () => lb.classList.remove('open'); lb.onclick = e => { if (e.target === lb) lb.classList.remove('open') }; addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open') });
 
     const menuBtn = document.querySelector('.menu');
@@ -2412,7 +2762,6 @@
       });
     }
     
-    // FORM LIÊN HỆ TƯ VẤN
     contactForm.onsubmit = e => { 
       e.preventDefault(); 
       formMsg.style.color = '#005c45'; 
@@ -2511,7 +2860,6 @@
     let currentTargetIndex = 0;
     let isTransitioning = false;
 
-    // Generate indicators dynamically
     const indicatorsContainer = document.createElement('div');
     indicatorsContainer.className = 'scroll-indicators';
     document.body.appendChild(indicatorsContainer);
@@ -2604,18 +2952,17 @@
       const targetBottom = currentTarget.offsetTop + currentTarget.offsetHeight;
 
       if (e.deltaY > 0) {
-        // Scrolling DOWN: only snap if bottom of current section is reached
         if (currentScrollTop + windowHeight < targetBottom - 25) {
-          return; // Allow internal scrolling
+          return; 
         }
         e.preventDefault();
         if (currentTargetIndex < scrollTargets.length - 1) {
           scrollToSection(currentTargetIndex + 1);
         }
       } else if (e.deltaY < 0) {
-        // Scrolling UP: only snap if top of current section is reached
+
         if (currentScrollTop > targetTop + 25) {
-          return; // Allow internal scrolling
+          return; 
         }
         e.preventDefault();
         if (currentTargetIndex > 0) {
@@ -2681,7 +3028,6 @@
       updateCurrentIndexFromScroll();
     });
 
-    // Scroll to hash section on load (e.g. #products when returning from article)
     function handleInitialHash() {
       if (window.location.hash) {
         const hashId = window.location.hash.substring(1);
